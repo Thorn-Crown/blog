@@ -73,8 +73,8 @@ export default defineConfig({
 	import firefly from 'firefly';
 	
 	export default defineConfig({
-	  site: "https://thron-crown.github.io",
-	  base: process.env.NODE_ENV === 'production' ? "/blog/" : "",
+	  site: 'https://thron-crown.github.io/',
+	  base: "/blog/",
 	  trailingSlash: "always",
 	  integrations: [firefly()],
 	});
