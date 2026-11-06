@@ -69,14 +69,14 @@ const adapter = process.env.CF_WORKERS
 export default defineConfig({
 	site: siteConfig.site_url,
 
-	base: "/",
+	base: "/blog/",
 	trailingSlash: "always",
-
+	
 	// 字体配置 - 只加载实际使用的字体，跳过未引用的以加快构建
 	fonts: (() => {
 		// 禁用字体功能时直接返回空数组，跳过 Astro Font API 集成
 		if (!fontConfig.enable) return [];
-
+	
 		const used = collectUsedFontCssVars(fontConfig);
 		return fontsList
 			.filter((f) => used.has(f.cssVariable))
@@ -107,15 +107,15 @@ export default defineConfig({
 				return { ...f, provider };
 			});
 	})(),
-
+	
 	adapter,
-
+	
 	// 图像优化配置
 	image: {
 		// 组件可自行传入 layout/widths；这里只控制 Markdown 正文图片
 		layout: "none",
 	},
-
+	
 	integrations: [
 		swup({
 			theme: false,
