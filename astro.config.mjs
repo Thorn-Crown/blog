@@ -69,15 +69,8 @@ const adapter = process.env.CF_WORKERS
 export default defineConfig({
 	site: siteConfig.site_url,
 
-	import { defineConfig } from 'astro/config';
-	import firefly from 'firefly';
-	
-	export default defineConfig({
-	  site: 'https://thron-crown.github.io/',
-	  base: "/blog/",
-	  trailingSlash: "always",
-	  integrations: [firefly()],
-	});
+	base: "/blog/",
+	trailingSlash: "always",
 	
 	// 字体配置 - 只加载实际使用的字体，跳过未引用的以加快构建
 	fonts: (() => {
