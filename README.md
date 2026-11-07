@@ -1,39 +1,25 @@
-
 <img src="./docs/images/1131.png" width = "350" height = "500" alt="Firefly" align=right />
 
 <div align="center">
 
 # 流萤 / Firefly 
 > 一款清新美观的 Astro 静态博客主题模板
-> 
+>
 > ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 
-![pnpm >= 11](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
-![Astro](https://img.shields.io/badge/Astro-7-orange)
-![TypeScript](https://img.shields.io/badge/TypeScript-6-blue)
->
-> [![Stars](https://img.shields.io/github/stars/CuteLeaf/Firefly?style=social)](https://github.com/CuteLeaf/Firefly/stargazers)
-[![Forks](https://img.shields.io/github/forks/CuteLeaf/Firefly?style=social)](https://github.com/CuteLeaf/Firefly/network/members)
-[![Issues](https://img.shields.io/github/issues/CuteLeaf/Firefly)](https://github.com/CuteLeaf/Firefly/issues)
-> 
-> [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z41NQALY)
->
-> **QQ交流群：[1087127207](https://qm.qq.com/q/ZGsFa8qX2G)**
-> 
+> ![pnpm >= 11](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
+> ![Astro](https://img.shields.io/badge/Astro-7-orange)
+> ![TypeScript](https://img.shields.io/badge/TypeScript-6-blue)
 > ![GitHub License](https://img.shields.io/github/license/CuteLeaf/Firefly)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/CuteLeaf/Firefly)
-[![爱发电打赏](https://img.shields.io/badge/爱发电-打赏作者-ff69b4.svg)](https://ifdian.net/a/cuteleaf)
+>
+> [![Afdian Sponsor](https://img.shields.io/badge/Afdian-Sponsor%20Author-ff69b4.svg)](https://ifdian.net/a/cuteleaf)
 
 </div>
 
 
 ---
-📖 README：
-**[简体中文](README.md)** | **[繁體中文](docs/README.zh-TW.md)** | **[English](README.en.md)** | **[日本語](docs/README.ja.md)** | **[한국어](docs/README.ko.md)**
+📖 README：**[简体中文](README.md)** | **[English](docs/README.en.md)** |
 
-🚀 快速指南：
-[**🖥️在线预览**](https://firefly.cuteleaf.cn/) /
-[**📝使用文档**](https://docs-firefly.cuteleaf.cn/) /
-[**🍀我的博客**](https://blog.cuteleaf.cn) 
+🚀 快速指南：[**🖥️在线预览**](https://firefly.cuteleaf.cn/) /[**📝使用文档**](https://docs-firefly.cuteleaf.cn/) /[**🍀我的博客**](https://blog.cuteleaf.cn) 
 
 ⚡ 静态站点生成: 基于 Astro 的超快加载速度和 SEO 优化
 

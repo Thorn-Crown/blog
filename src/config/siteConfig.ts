@@ -28,7 +28,7 @@ const pages = resolvePageToggles({
 	// 哔哩哔哩追番页面开关
 	bilibili: false,
 	// 番组计划页面开关
-	bangumi: false,
+	bangumi: true,
 	// VNDB页面开关
 	vndb: false,
 	// MyAnimeList页面开关
@@ -37,15 +37,15 @@ const pages = resolvePageToggles({
 	// ── 关于 (About) ──────────────────────────────────
 	
 	// 打赏页面开关
-	sponsor: true,
+	sponsor: false,
 });
 
 export const siteConfig: SiteConfig = {
 	// 站点标题
-	title: "Firefly",
+	title: "Thorn-Crown's blog",
 
 	// 站点副标题
-	subtitle: "Demo site",
+	//subtitle: "Thorn-Crown's blog",
 	
 	// 站点 URL
 	site_url: "https://thorn-crown.github.io",
@@ -117,9 +117,9 @@ export const siteConfig: SiteConfig = {
 			alt: "🍀",
 		},
 		// 导航栏标题
-		title: "Firefly Blog",
+		title: "Thorn-Crown Blog",
 		// 全宽导航栏，导航栏是否占满屏幕宽度
-		widthFull: false,
+		widthFull: true,
 		// 导航菜单对齐方式，left：左对齐，center：居中
 		menuAlign: "center",
 		// 导航栏图标和标题是否跟随主题色
@@ -146,7 +146,7 @@ export const siteConfig: SiteConfig = {
 	// 分类导航栏按钮样式
 	// "pill"：胶囊，主题色浅底圆角
 	// "rectangle"：矩形，配色同胶囊，仅圆角更小
-	categoryStyle: "rectangle",
+	categoryStyle: "pill",
 	
 	// 标签样式，作用于文章列表底部标签、标签页和侧边栏标签
 	// "pill"：胶囊，主题色底圆角
