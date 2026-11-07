@@ -6,10 +6,10 @@ export const announcementConfig: AnnouncementConfig = {
 
 	// 公告内容
 	content: "欢迎来到我的博客！本博客正在开发中，功能不甚完善。",
-	
+
 	// 是否允许用户关闭公告
 	closable: true,
-	
+
 	link: {
 		// 启用链接
 		enable: true,

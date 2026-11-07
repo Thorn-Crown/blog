@@ -14,9 +14,9 @@ const pages = resolvePageToggles({
 	friends: true,
 	// 留言板页面开关，需要配置评论系统
 	guestbook: true,
-	
+
 	// ── 我的 (My) ──────────────────────────────────
-	
+
 	// 动态页面开关
 	dynamic: true,
 	// 项目展示页开关
@@ -33,9 +33,9 @@ const pages = resolvePageToggles({
 	vndb: false,
 	// MyAnimeList页面开关
 	mal: false,
-	
+
 	// ── 关于 (About) ──────────────────────────────────
-	
+
 	// 打赏页面开关
 	sponsor: false,
 });
@@ -45,15 +45,15 @@ export const siteConfig: SiteConfig = {
 	title: "Thorn-Crown's blog",
 
 	// 站点副标题
-	//subtitle: "Thorn-Crown's blog",
-	
+	subtitle: "",
+
 	// 站点 URL
 	site_url: "https://thorn-crown.github.io",
-	
+
 	// 站点描述
 	description:
 		"Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
-	
+
 	// 站点关键词
 	keywords: [
 		"Firefly",
@@ -64,7 +64,7 @@ export const siteConfig: SiteConfig = {
 		"技术博客",
 		"静态博客",
 	],
-	
+
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
@@ -72,12 +72,12 @@ export const siteConfig: SiteConfig = {
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
 		defaultMode: "system",
 	},
-	
+
 	// 页面整体宽度（单位：rem）
 	// 数值越大可以让页面内容区域更宽
 	// 在使用单侧栏边栏时，建议调低一些宽度以获得更好的视觉效果。
 	pageWidth: 100,
-	
+
 	// 网站Card样式配置
 	card: {
 		// 是否开启卡片边框和阴影，开启后让网站更有立体感
@@ -85,7 +85,7 @@ export const siteConfig: SiteConfig = {
 		// 是否让卡片风格跟随主题色相
 		followTheme: false,
 	},
-	
+
 	// Favicon 配置
 	// 如果启用了OpenGraph图片功能，数组中需要包含png格式的favicon图标
 	favicon: [
@@ -98,7 +98,7 @@ export const siteConfig: SiteConfig = {
 			// sizes: "32x32",
 		},
 	],
-	
+
 	// 导航栏配置
 	navbar: {
 		// 导航栏Logo
@@ -130,33 +130,33 @@ export const siteConfig: SiteConfig = {
 		// "dynamic"：固定在顶部，下滑隐藏、轻微上滑显示
 		navbarMode: "dynamic",
 	},
-	
+
 	// 站点开始日期，用于统计运行天数
 	siteStartDate: "2026-11-06",
-	
+
 	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
 	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
 	timezone: "Asia/Shanghai",
-	
+
 	// 页面开关配置 - 控制特定页面的访问权限，设为false会返回404并自动隐藏对应的导航栏菜单项
-	
+
 	// 分类导航栏开关，在首页和归档页顶部显示分类快捷导航
 	categoryBar: true,
-	
+
 	// 分类导航栏按钮样式
 	// "pill"：胶囊，主题色浅底圆角
 	// "rectangle"：矩形，配色同胶囊，仅圆角更小
 	categoryStyle: "pill",
-	
+
 	// 标签样式，作用于文章列表底部标签、标签页和侧边栏标签
 	// "pill"：胶囊，主题色底圆角
 	// "pill-gray"：胶囊，中性灰底圆角
 	// "rectangle"：矩形，主题色底小圆角
 	tagStyle: "pill",
-	
+
 	// 归档页是否折叠非最新年份文章，禁用后默认展开全部年份
 	foldArticle: true,
-	
+
 	// ── 文章列表布局配置 ──────────────────────────────────
 	postListLayout: {
 		// 默认布局模式："list" 列表模式（单列布局），"grid" 网格模式（多列布局）
@@ -215,13 +215,13 @@ export const siteConfig: SiteConfig = {
 			coverFullWidth: false,
 		},
 	},
-	
+
 	// 分页配置
 	pagination: {
 		// 每页显示的文章数量
 		postsPerPage: 10,
 	},
-	
+
 	// ── 文章内容页配置 ──────────────────────────────────
 	post: {
 		// 提醒框（Admonitions）配置，修改后需要重启开发服务器才能生效
@@ -258,13 +258,13 @@ export const siteConfig: SiteConfig = {
 			tocPosition: "left",
 		},
 	},
-	
+
 	// ── Bilibili配置 ──────────────────────────────────
 	bilibili: {
 		// 你的 Bilibili 用户 UID
 		uid: "38932988",
 	},
-	
+
 	// ── 番组计划bangumi配置 ──────────────────────────────────
 	bangumi: {
 		// Bangumi用户ID
@@ -288,7 +288,7 @@ export const siteConfig: SiteConfig = {
 		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
 		nsfw: "hide",
 	},
-	
+
 	// ── VNDB配置 ──────────────────────────────────
 	vndb: {
 		// VNDB 用户 ID
@@ -308,7 +308,7 @@ export const siteConfig: SiteConfig = {
 		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
 		nsfw: "hide",
 	},
-	
+
 	// ── MyAnimeList配置 ──────────────────────────────────
 	mal: {
 		// MyAnimeList 用户名（列表需为公开状态，私密列表无法读取）
@@ -324,7 +324,7 @@ export const siteConfig: SiteConfig = {
 		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
 		nsfw: "hide",
 	},
-	
+
 	// ── 图像优化配置 ──────────────────────────────────
 	// 图像优化压缩只保留avif或webp
 	// 响应式图像是为在不同设备上提高性能而调整的图像。这些图像可以调整大小以适应其容器，并且可以根据访问者的屏幕尺寸和分辨率以不同的大小提供。
@@ -348,7 +348,7 @@ export const siteConfig: SiteConfig = {
 			"*.vndb.org",
 		],
 	},
-	
+
 	// ── 订阅 (RSS / Atom) 配置 ──────────────────────────────────
 	feed: {
 		// 订阅条目内容模式：
@@ -356,10 +356,10 @@ export const siteConfig: SiteConfig = {
 		// - "summary": 仅包含文章摘要/描述，不含正文，体积更小
 		contentMode: "full",
 	},
-	
+
 	// 站点语言，在本配置文件顶部SITE_LANG定义
 	lang: SITE_LANG,
-	
+
 	// 页面开关配置，在本配置文件顶部pages定义
 	pages,
 };
