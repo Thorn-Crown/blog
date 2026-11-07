@@ -15,7 +15,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 	// 主页
 	links.push(LinkPresets.Home);
-	
+
 	// 文章及其子菜单
 	links.push({
 		name: "文章",
@@ -24,25 +24,25 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 			// 归档
 			LinkPresets.Archive,
-	
+
 			// 分类
 			LinkPresets.Categories,
-	
+
 			// 标签
 			LinkPresets.Tags,
-	
+
 			// 系列
 			LinkPresets.Series,
 		],
 	});
-	
+
 	// 工具导航
 	links.push({
 		name: "导航",
 		url: "/booknav/",
 		icon: "andrsrxn:navigation-circle",
 	});
-	
+
 	//社交及其子菜单
 	links.push({
 		name: "社交",
@@ -51,12 +51,12 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 			// 友链
 			LinkPresets.Friends,
-	
+
 			// 留言
 			LinkPresets.Guestbook,
 		],
 	});
-	
+
 	// 我的及其子菜单
 	links.push({
 		name: "我的",
@@ -65,30 +65,30 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 			// 动态
 			LinkPresets.Dynamic,
-	
+
 			// 项目
 			LinkPresets.Projects,
-	
+
 			// 相册
 			LinkPresets.Gallery,
-	
+
 			// 书签导航
 			LinkPresets.Booknav,
-	
+
 			// 哔哩哔哩追番
 			LinkPresets.Bilibili,
-	
+
 			// 番组计划
 			LinkPresets.Bangumi,
-	
+
 			// VNDB
 			LinkPresets.VNDB,
-	
+
 			// MyAnimeList
 			LinkPresets.MAL,
 		],
 	});
-	
+
 	// 关于及其子菜单
 	links.push({
 		name: "关于",
@@ -97,12 +97,12 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 			// 打赏
 			LinkPresets.Sponsor,
-	
+
 			// 关于页面
 			LinkPresets.About,
 		],
 	});
-	
+
 	// 自定义导航栏链接
 	links.push({
 		name: "链接",
@@ -131,7 +131,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			// },
 		],
 	});
-	
+
 	// 文档链接
 	// links.push({
 	// 	name: "文档",
@@ -139,7 +139,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 	external: true,
 	// 	icon: "material-symbols:docs",
 	// });
-	
+
 	return { links } as NavBarConfig;
 };
 
