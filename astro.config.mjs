@@ -354,7 +354,7 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		server: {
 			watch: {
-				ignored: ["**/package/**", "**/Firefly-docs/**"],
+				ignored: ["**/package/**", "**/Firefly-docs/**",'G:\\System Volume Information', '**/System Volume Information/**',],
 			},
 		},
 		resolve: {

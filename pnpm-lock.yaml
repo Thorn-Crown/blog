@@ -219,6 +219,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.6.3
         version: 2.6.3
+      '@iconify-json/andrsrxn':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -1680,6 +1683,9 @@ packages:
 
   '@fontsource-variable/noto-sans-sc@5.3.1':
     resolution: {integrity: sha512-UB96JJ17HyD5ehEU7Em0hDdh7fvTMB4B4Hzmq5c4QaNwwSLqTrdM2S+coySeBqCkXwh0DxqXT0b0wMrmzorFpQ==}
+
+  '@iconify-json/andrsrxn@1.2.3':
+    resolution: {integrity: sha512-ntDZxeVd095++DQkypSyEVpsiU3018oWxzcW1Rk6+ImsUR6XM+TIlWY1i9L5ZBaz+eELWsCKFeip2tAxmdTQAw==}
 
   '@iconify-json/fa7-brands@1.2.4':
     resolution: {integrity: sha512-60acXyxhQl1lddBH5YGzfQLkzlP9jqNcblFmgel7lJpgsVx/4QmrXAL90ARb8XhHX7dFMGRDmlqER9mq8aaz2g==}
@@ -8208,6 +8214,10 @@ snapshots:
   '@fancyapps/ui@6.1.15': {}
 
   '@fontsource-variable/noto-sans-sc@5.3.1': {}
+
+  '@iconify-json/andrsrxn@1.2.3':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/fa7-brands@1.2.4':
     dependencies:
