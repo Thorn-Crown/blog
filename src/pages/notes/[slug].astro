@@ -1,30 +1,30 @@
 ---
-import { Icon } from "astro-icon/components";
 import { getCollection, render } from "astro:content";
+import { Icon } from "astro-icon/components";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import "@/styles/pages/common.css";
 import "@/styles/pages/dynamic.css";
 
 export async function getStaticPaths() {
-    const notes = await getCollection("notes");
-    return notes
-        .filter((entry) => !entry.data.draft)
-        .map((entry) => ({
-            params: { slug: entry.id },
-            props: { note: entry },
-        }));
+	const notes = await getCollection("notes");
+	return notes
+		.filter((entry) => !entry.data.draft)
+		.map((entry) => ({
+			params: { slug: entry.id },
+			props: { note: entry },
+		}));
 }
 
 const { note } = Astro.props;
 const title = note.data.title || note.id;
 const description = note.data.description || "";
 const date = note.data.published
-    ? new Date(note.data.published).toLocaleDateString("zh-CN", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        })
-    : "";
+	? new Date(note.data.published).toLocaleDateString("zh-CN", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		})
+	: "";
 
 const { Content } = await render(note);
 ---
