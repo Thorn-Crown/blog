@@ -18,9 +18,9 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 	// 文章及其子菜单
 	links.push({
-		name: "文章",
+		name: "博客",
 		url: "#",
-		icon: "material-symbols:article",
+		icon: "hugeicons:quill-write-02",
 		children: [
 			// 归档
 			LinkPresets.Archive,
@@ -36,9 +36,16 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		],
 	});
 
+	// 笔记
+	links.push({
+		name: "笔记",
+		url: "/notes/",
+		icon: "andrsrxn:notes",
+	});
+
 	// 工具导航
 	links.push({
-		name: "导航",
+		name: "资源",
 		url: "/booknav/",
 		icon: "andrsrxn:navigation-circle",
 	});
@@ -53,7 +60,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			LinkPresets.Friends,
 
 			// 留言
-			LinkPresets.Guestbook,
+			//LinkPresets.Guestbook,
 		],
 	});
 
@@ -61,7 +68,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	links.push({
 		name: "我的",
 		url: "#",
-		icon: "material-symbols:person",
+		icon: "bi:person-circle",
 		children: [
 			// 动态
 			LinkPresets.Dynamic,
@@ -99,7 +106,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			LinkPresets.Sponsor,
 
 			// 关于页面
-			LinkPresets.About,
+			//LinkPresets.About,
 		],
 	});
 
@@ -156,7 +163,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Home: {
 		name: "主页",
 		url: "/",
-		icon: "material-symbols:home",
+		icon: "akar-icons:home-alt1",
 	},
 	Archive: {
 		name: "归档",
@@ -181,7 +188,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Friends: {
 		name: "友链",
 		url: "/friends/",
-		icon: "material-symbols:link-2-rounded",
+		icon: "akar-icons:link-chain",
 		pageKey: "friends",
 	},
 	Guestbook: {
@@ -199,7 +206,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Projects: {
 		name: "项目",
 		url: "/projects/",
-		icon: "material-symbols:rocket-launch",
+		icon: "andrsrxn:folder-code",
 		pageKey: "projects",
 	},
 	Gallery: {
@@ -211,7 +218,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Booknav: {
 		name: "书签导航",
 		url: "/booknav/",
-		icon: "material-symbols:bookmarks",
+		icon: "andrsrxn:navigation-circle",
 		pageKey: "booknav",
 	},
 	Bilibili: {

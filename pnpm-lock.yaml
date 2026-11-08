@@ -219,9 +219,18 @@ importers:
       '@biomejs/biome':
         specifier: 2.6.3
         version: 2.6.3
+      '@iconify-json/akar-icons':
+        specifier: ^1.2.7
+        version: 1.2.7
       '@iconify-json/andrsrxn':
         specifier: ^1.2.3
         version: 1.2.3
+      '@iconify-json/bi':
+        specifier: ^1.2.7
+        version: 1.2.7
+      '@iconify-json/hugeicons':
+        specifier: ^1.2.35
+        version: 1.2.35
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -1684,8 +1693,14 @@ packages:
   '@fontsource-variable/noto-sans-sc@5.3.1':
     resolution: {integrity: sha512-UB96JJ17HyD5ehEU7Em0hDdh7fvTMB4B4Hzmq5c4QaNwwSLqTrdM2S+coySeBqCkXwh0DxqXT0b0wMrmzorFpQ==}
 
+  '@iconify-json/akar-icons@1.2.7':
+    resolution: {integrity: sha512-cw44dCnZgGhm6Tywxm0WALAnDB9AyGkDk7kiLMo2B/Ayt7duZu/uyrsqb55weWUN8Ge2sQAOl8MRtT6bFcLzPg==}
+
   '@iconify-json/andrsrxn@1.2.3':
     resolution: {integrity: sha512-ntDZxeVd095++DQkypSyEVpsiU3018oWxzcW1Rk6+ImsUR6XM+TIlWY1i9L5ZBaz+eELWsCKFeip2tAxmdTQAw==}
+
+  '@iconify-json/bi@1.2.7':
+    resolution: {integrity: sha512-IPz8WNxmLkH1I9msl+0Q4OnmjjvP4uU0Z61a4i4sqonB6vKSbMGUWuGn8/YuuszlReVj8rf+3gNv5JU8Xoljyg==}
 
   '@iconify-json/fa7-brands@1.2.4':
     resolution: {integrity: sha512-60acXyxhQl1lddBH5YGzfQLkzlP9jqNcblFmgel7lJpgsVx/4QmrXAL90ARb8XhHX7dFMGRDmlqER9mq8aaz2g==}
@@ -1695,6 +1710,9 @@ packages:
 
   '@iconify-json/fa7-solid@1.2.5':
     resolution: {integrity: sha512-e9EOtXuvDhiv6gBjbuW1q4bSR2tU5HmsDxqbLElQt2w2dR1Byh2mXfPLdRgEVwEr50uQV5tKxE3YAL6LTa+1fA==}
+
+  '@iconify-json/hugeicons@1.2.35':
+    resolution: {integrity: sha512-c06tY90JZnKhOLBAKoQ1z2pqXMRdATuYXslTKwaaIAjLzKsTIsE+GGknY6+qo/SP0U/NG9xQjr4N+zfDqOeQiQ==}
 
   '@iconify-json/material-symbols@1.2.96':
     resolution: {integrity: sha512-o+qGm+yczwBRKeYJlsv49o8PV1otMmVd90opcokpWw7wsIpR1JfTjUMEBXIlgdRZLosepXX2xWcVe7ydJmcWXg==}
@@ -8215,7 +8233,15 @@ snapshots:
 
   '@fontsource-variable/noto-sans-sc@5.3.1': {}
 
+  '@iconify-json/akar-icons@1.2.7':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/andrsrxn@1.2.3':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/bi@1.2.7':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -8228,6 +8254,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/fa7-solid@1.2.5':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/hugeicons@1.2.35':
     dependencies:
       '@iconify/types': 2.0.0
 

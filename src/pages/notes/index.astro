@@ -1,0 +1,85 @@
+﻿---
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import "@/styles/pages/common.css";
+
+const title = "我的笔记";
+const description = "记录一些零散的想法、片段和随手笔记。";
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const allNotes = await getCollection("notes");
+
+const notes = allNotes
+    .filter((entry) => !entry.data.draft)
+    .sort(
+        (a, b) =>
+            new Date(b.data.published).getTime() -
+            new Date(a.data.published).getTime()
+    );
+---
+
+<MainGridLayout title={title} description={description}>
+    <section class="page-shell" aria-labelledby="notes-page-title">
+        <div>
+            <header class="page-header card-base">
+                <div class="page-heading">
+                    <div class="page-icon" aria-hidden="true">
+                        <Icon name="andrsrxn:notes" />
+                    </div>
+                    <div>
+                        <h2 id="notes-page-title">{title}</h2>
+                        {description && <p>{description}</p>}
+                    </div>
+                </div>
+                <div class="page-count" aria-label={title}>
+                    <Icon name="material-symbols:article" />
+                    <strong>{notes.length}</strong>
+                    <span>篇笔记</span>
+                </div>
+            </header>
+
+            {notes.length === 0 ? (
+                <div class="card-base" style="padding: 2rem; text-align: center;">
+                    <p>还没有笔记，去 <code>src/content/notes/</code> 里写几篇吧。</p>
+                </div>
+            ) : (
+                <div class="card-base" style="padding: 1.5rem;">
+                    <ul style="list-style: none; margin: 0; padding: 0;">
+                        {notes.map((note) => {
+                            const date = note.data.published
+                                ? new Date(note.data.published).toLocaleDateString("zh-CN")
+                                : "";
+
+                            return (
+                                <li style="padding: 1rem 0; border-bottom: 1px solid var(--card-border, #eee);">
+                                    {/* ✅ 关键：用 baseUrl 拼 href，而不是裸 /notes/ */}
+                                    <a
+                                        href={`${baseUrl}notes/${note.id}/`}
+                                        style="display: block; text-decoration: none;"
+                                    >
+                                        <div style="font-weight: 600; font-size: 1.05rem;">
+                                            {note.data.title || note.id}
+                                        </div>
+                                        {date && (
+                                            <div style="font-size: 0.85rem; color: var(--text-secondary, #888); margin-top: 0.25rem;">
+                                                {date}
+                                            </div>
+                                        )}
+                                        {note.data.description && (
+                                            <div style="font-size: 0.9rem; color: var(--text-secondary, #666); margin-top: 0.4rem;">
+                                                {note.data.description}
+                                            </div>
+                                        )}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            )}
+        </div>
+    </section>
+</MainGridLayout>
+

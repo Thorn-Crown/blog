@@ -54,6 +54,13 @@ type ProjectData = {
 	lang: string;
 };
 
+type NoteData = {
+	title: string;
+	published: Date;
+	draft: boolean;
+	description: string;
+};
+
 type ContentCollection<T> = CollectionConfig<
 	ZodType<T>,
 	ReturnType<typeof glob>
@@ -130,13 +137,25 @@ const projectsCollection: ContentCollection<ProjectData> = defineCollection({
 	}),
 });
 
+const notesCollection: ContentCollection<NoteData> = defineCollection({
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/notes" }),
+	schema: z.object({
+		title: z.string(),
+		published: z.date(),
+		draft: z.boolean().optional().default(false),
+		description: z.string().optional().default(""),
+	}),
+});
+
 export const collections: {
 	dynamic: typeof dynamicCollection;
+	notes: typeof notesCollection;
 	posts: typeof postsCollection;
 	spec: typeof specCollection;
 	projects: typeof projectsCollection;
 } = {
 	dynamic: dynamicCollection,
+	notes: notesCollection,
 	posts: postsCollection,
 	spec: specCollection,
 	projects: projectsCollection,

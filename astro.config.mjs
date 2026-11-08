@@ -155,6 +155,9 @@ export default defineConfig({
 				"fa7-regular": ["*"],
 				"fa7-solid": ["*"],
 				"simple-icons": ["*"],
+				hugeicons: ["*"],
+				"akar-icons": ["*"],
+				bi: ["*"],
 				mdi: ["*"],
 				mingcute: ["*"],
 			},
@@ -351,10 +354,30 @@ export default defineConfig({
 		}),
 	},
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [
+			tailwindcss(),
+			{
+				name: "watch-error-guard",
+				configureServer(server) {
+					// 监听根覆盖到磁盘根目录时，遍历受保护的系统目录（如
+					// G:\System Volume Information）会让 chokidar 抛 EINVAL，
+					// 未处理会直接终止 dev 进程，这里拦截掉不影响功能的错误。
+					server.watcher.on("error", (err) => {
+						if (err?.code === "EINVAL" || err?.code === "EPERM" || err?.code === "ENOENT") {
+							return;
+						}
+						throw err;
+					});
+				},
+			},
+		],
 		server: {
 			watch: {
-				ignored: ["**/package/**", "**/Firefly-docs/**",'G:\\System Volume Information', '**/System Volume Information/**',],
+				// chokidar 5 已移除 glob 支持，ignored 只能用函数/正则。
+				// 监听根覆盖到磁盘根目录，扫描到受保护的系统目录时 lstat 抛 EINVAL
+				// 会让 dev server 直接崩溃，这里显式跳过。
+				ignored: (p) =>
+					/[\\/](System Volume Information|Firefly-docs|package)([\\/]|$)/i.test(p),
 			},
 		},
 		resolve: {
