@@ -455,6 +455,7 @@ export const ko: Translation = {
 	// Site Info
 	[Key.siteInfo]: "사이트 정보",
 	[Key.siteInfoBuildTime]: "빌드 시각",
+	[Key.siteInfoCreateDate]: "사이트 생성일",
 	[Key.siteInfoBuildPlatform]: "빌드 플랫폼",
 	[Key.siteInfoBlogVersion]: "블로그 버전",
 	[Key.siteInfoAstroVersion]: "Astro 버전",

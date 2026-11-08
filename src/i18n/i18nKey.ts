@@ -441,6 +441,7 @@ enum I18nKey {
 	// 站点信息
 	siteInfo = "siteInfo",
 	siteInfoBuildTime = "siteInfoBuildTime",
+	siteInfoCreateDate = "siteInfoCreateDate",
 	siteInfoBuildPlatform = "siteInfoBuildPlatform",
 	siteInfoBlogVersion = "siteInfoBlogVersion",
 	siteInfoAstroVersion = "siteInfoAstroVersion",

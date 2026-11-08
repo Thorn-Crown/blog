@@ -9,7 +9,7 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import type { WidgetComponentConfig } from "@/types/config";
 import { detectBuildPlatform } from "@/utils/build-platform";
-import { formatDateI18nWithTime } from "@/utils/date-utils";
+import { formatDateI18n, formatDateI18nWithTime } from "@/utils/date-utils";
 
 interface Props {
 	class?: string;
@@ -53,6 +53,18 @@ if (pnpmMatch) {
 
 // 构建时间
 const buildTime = formatDateI18nWithTime(new Date());
+
+// 建站时间（来自 siteConfig.siteCreateDate，固定不变；未配置则隐藏该项）
+// 同时计算已运行天数（构建时计算，随每次构建刷新）
+let siteCreateDateText: string | undefined;
+let siteCreateDaysText: string | undefined;
+if (siteConfig.siteCreateDate) {
+	const createDate = new Date(siteConfig.siteCreateDate);
+	const now = Date.now();
+	const days = Math.max(0, Math.floor((now - createDate.getTime()) / 86400000));
+	siteCreateDateText = formatDateI18n(siteConfig.siteCreateDate);
+	siteCreateDaysText = `已运行 ${days} 天`;
+}
 
 // 构建平台检测（使用 ci-info 自动识别 CI 环境）
 const unknownBuildPlatform =
@@ -118,6 +130,7 @@ const detailItems: {
 	label: string;
 	value: string;
 	fullWidth?: boolean;
+	title?: string;
 }[] = [
 	{
 		icon: "material-symbols:language",
@@ -145,6 +158,17 @@ const detailItems: {
 		label: i18n(I18nKey.siteInfoPnpmVersion),
 		value: pnpmVersion,
 	},
+	...(siteCreateDaysText
+		? [
+				{
+					icon: "material-symbols:event-available",
+					label: i18n(I18nKey.siteInfoCreateDate),
+					value: siteCreateDaysText,
+					title: siteCreateDateText,
+					fullWidth: true,
+				},
+			]
+		: []),
 	{
 		icon: "material-symbols:build-outline",
 		label: i18n(I18nKey.siteInfoBuildTime),
@@ -213,7 +237,7 @@ const detailItems: {
         <div class="grid grid-cols-2 gap-2">
           {
             detailItems.map(
-              (item: { icon: string; label: string; value: string; fullWidth?: boolean }) => (
+              (item: { icon: string; label: string; value: string; fullWidth?: boolean; title?: string }) => (
                 <div class:list={[
                   "flex flex-col items-center gap-1 py-2 px-1 rounded-lg bg-neutral-100/60 dark:bg-neutral-800/50",
                   { "col-span-2": item.fullWidth }
@@ -229,7 +253,7 @@ const detailItems: {
                       "text-sm font-bold text-neutral-900 dark:text-neutral-100 text-center truncate w-full",
                       { "text-xs": item.fullWidth }
                     ]}
-                    title={item.value}
+                    title={item.title ?? item.value}
                   >
                     {item.value}
                   </span>

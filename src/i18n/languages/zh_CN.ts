@@ -447,6 +447,7 @@ export const zh_CN: Translation = {
 	// 站点信息
 	[Key.siteInfo]: "站点信息",
 	[Key.siteInfoBuildTime]: "构建时间",
+	[Key.siteInfoCreateDate]: "建站时间",
 	[Key.siteInfoBuildPlatform]: "构建平台",
 	[Key.siteInfoBlogVersion]: "博客版本",
 	[Key.siteInfoAstroVersion]: "Astro",

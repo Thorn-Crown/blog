@@ -33,6 +33,7 @@ export type SiteConfig = {
 	title: string;
 	subtitle: string;
 	site_url: string;
+	siteCreateDate?: string; // 建站日期，格式 YYYY-MM-DD，在站点信息中展示
 	description?: string; // 网站描述，用于生成 <meta name="description">
 	keywords?: string[]; // 站点关键词，用于生成 <meta name="keywords">
 

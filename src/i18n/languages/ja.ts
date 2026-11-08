@@ -455,6 +455,7 @@ export const ja: Translation = {
 	// サイト情報
 	[Key.siteInfo]: "サイト情報",
 	[Key.siteInfoBuildTime]: "ビルド日時",
+	[Key.siteInfoCreateDate]: "サイト作成日",
 	[Key.siteInfoBuildPlatform]: "ビルドプラットフォーム",
 	[Key.siteInfoBlogVersion]: "ブログバージョン",
 	[Key.siteInfoAstroVersion]: "Astro バージョン",

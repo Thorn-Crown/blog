@@ -6,13 +6,13 @@ export const profileConfig: ProfileConfig = {
 	// 1. public 目录（以 "/" 开头，不优化）："/assets/images/avatar.webp"
 	// 2. src 目录（不以 "/" 开头，自动优化但会增加构建时间，推荐）："assets/images/avatar.webp"
 	// 3. 远程 URL："https://example.com/avatar.jpg"
-	avatar: "assets/images/avatar.avif",
+	avatar: "assets/images/Q版夜见.avif",
 
 	// 名字
-	name: "Shi jian",
+	name: "蚀间咸咸",
 
 	// 个人签名
-	bio: "Hello, I'm Shijian.",
+	bio: "Hello, I'm 蚀间咸咸.",
 
 	// 链接配置
 	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons
@@ -33,12 +33,12 @@ export const profileConfig: ProfileConfig = {
 			url: "mailto:thorn1433223@gmail.com",
 			showName: false,
 		},
-		{
-			name: "RSS",
-			icon: "fa7-solid:rss",
-			url: "/rss/",
-			showName: false,
-		},
+		// {
+		// 	name: "RSS",
+		// 	icon: "fa7-solid:rss",
+		// 	url: "/rss/",
+		// 	showName: false,
+		// },
 		{
 			name: "Atom",
 			icon: "fa7-solid:atom",

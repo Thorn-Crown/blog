@@ -458,6 +458,7 @@ export const en: Translation = {
 	// Site Info
 	[Key.siteInfo]: "Site Info",
 	[Key.siteInfoBuildTime]: "Build Time",
+	[Key.siteInfoCreateDate]: "Site Created",
 	[Key.siteInfoBuildPlatform]: "Build Platform",
 	[Key.siteInfoBlogVersion]: "Blog Version",
 	[Key.siteInfoAstroVersion]: "Astro Version",

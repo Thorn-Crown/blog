@@ -50,6 +50,9 @@ export const siteConfig: SiteConfig = {
 	// 站点 URL
 	site_url: "https://thorn-crown.github.io",
 
+	// 建站日期（YYYY-MM-DD），在站点信息中展示，不会随构建变化
+	siteCreateDate: "2026-11-6",
+
 	// 站点描述
 	description:
 		"Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
@@ -274,9 +277,11 @@ export const siteConfig: SiteConfig = {
 		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
 		mode: "dynamic",
 		// Bangumi API 地址
-		apiUrl: "https://api.bangumi.pro",
+		// 必须使用最终地址：api.bangumi.pro 会 301 跳转到 api.bangumi.lat，
+		// 而跨域重定向的响应不带 CORS 头，浏览器会直接拦截（ERR_FAILED）
+		apiUrl: "https://api.bangumi.lat",
 		// 详情页地址
-		subjectBaseUrl: "https://api.bangumi.pro/subject/",
+		subjectBaseUrl: "https://api.bangumi.lat/subject/",
 		// 条目类型排序，数组中的类型将按顺序优先展示
 		// 可选值: "anime" | "book" | "music" | "game" | "real" (暂不支持"real"类型)
 		// 未列出的类型将按默认顺序排在后面

@@ -459,6 +459,7 @@ export const ru: Translation = {
 	// Информация о сайте
 	[Key.siteInfo]: "Информация о сайте",
 	[Key.siteInfoBuildTime]: "Время сборки",
+	[Key.siteInfoCreateDate]: "Дата создания",
 	[Key.siteInfoBuildPlatform]: "Платформа сборки",
 	[Key.siteInfoBlogVersion]: "Версия блога",
 	[Key.siteInfoAstroVersion]: "Astro",
