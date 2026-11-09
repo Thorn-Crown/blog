@@ -47,22 +47,23 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	links.push({
 		name: "资源",
 		url: "/booknav/",
-		icon: "andrsrxn:navigation-circle",
+		icon: "carbon:software-resource-cluster",
 	});
 
-	//社交及其子菜单
-	links.push({
-		name: "社交",
-		url: "#",
-		icon: "material-symbols:group",
-		children: [
-			// 友链
-			LinkPresets.Friends,
-
-			// 留言
-			//LinkPresets.Guestbook,
-		],
-	});
+	// 社交及其子菜单
+	// 做减法：收起到「我的」子菜单里，友链已并入下方
+	// links.push({
+	// 	name: "社交",
+	// 	url: "#",
+	// 	icon: "material-symbols:group",
+	// 	children: [
+	// 		// 友链
+	// 		LinkPresets.Friends,
+	//
+	// 		// 留言
+	// 		//LinkPresets.Guestbook,
+	// 	],
+	// });
 
 	// 我的及其子菜单
 	links.push({
@@ -70,6 +71,9 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		url: "#",
 		icon: "bi:person-circle",
 		children: [
+			// 友链（由原「社交」并入）
+			LinkPresets.Friends,
+
 			// 动态
 			LinkPresets.Dynamic,
 
@@ -79,8 +83,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			// 相册
 			LinkPresets.Gallery,
 
-			// 书签导航
-			LinkPresets.Booknav,
+			// 书签导航（顶部「资源」已指向 /booknav/，这里不再重复）
+			// LinkPresets.Booknav,
 
 			// 哔哩哔哩追番
 			LinkPresets.Bilibili,
@@ -93,51 +97,48 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 			// MyAnimeList
 			LinkPresets.MAL,
-		],
-	});
 
-	// 关于及其子菜单
-	links.push({
-		name: "关于",
-		url: "#",
-		icon: "material-symbols:info",
-		children: [
-			// 打赏
-			LinkPresets.Sponsor,
-
-			// 关于页面
-			//LinkPresets.About,
-		],
-	});
-
-	// 自定义导航栏链接
-	links.push({
-		name: "链接",
-		url: "#",
-		icon: "material-symbols:link",
-		// 子菜单
-		children: [
+			// 源码仓库（由原「链接」并入）
 			{
 				name: "GitHub",
 				url: "https://github.com/Thorn-Crown/blog",
 				external: true,
 				icon: "fa7-brands:github",
 			},
-			// 不想显示的就整段删掉，或者用注释包起来
-			// {
-			// 	name: "Gitee",
-			// 	url: "#",
-			// 	external: false,
-			// 	icon: "fa7-brands:gitee",
-			// },
-			// {
-			// 	name: "Firefly文档",
-			// 	url: "https://docs-firefly.cuteleaf.cn",
-			// 	external: false,
-			// 	icon: "material-symbols:docs",
-			// },
 		],
 	});
+
+	// 关于及其子菜单
+	// 做减法：打赏页已关闭（pages.sponsor: false），暂时收起整个入口
+	// links.push({
+	// 	name: "关于",
+	// 	url: "#",
+	// 	icon: "material-symbols:info",
+	// 	children: [
+	// 		// 打赏
+	// 		LinkPresets.Sponsor,
+	//
+	// 		// 关于页面
+	// 		//LinkPresets.About,
+	// 	],
+	// });
+
+	// 自定义导航栏链接
+	// 做减法：GitHub 已并入「我的」子菜单，暂时收起整个入口
+	// links.push({
+	// 	name: "链接",
+	// 	url: "#",
+	// 	icon: "material-symbols:link",
+	// 	// 子菜单
+	// 	children: [
+	// 		{
+	// 			name: "GitHub",
+	// 			url: "https://github.com/Thorn-Crown/blog",
+	// 			external: true,
+	// 			icon: "fa7-brands:github",
+	// 		},
+	// 	],
+	// });
 
 	// 文档链接
 	// links.push({

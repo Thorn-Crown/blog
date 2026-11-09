@@ -160,6 +160,7 @@ export default defineConfig({
 				bi: ["*"],
 				mdi: ["*"],
 				mingcute: ["*"],
+				carbon: ["*"],
 			},
 		}),
 		expressiveCode({

@@ -65,7 +65,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 横幅壁纸和全屏壁纸共享配置
 	common: {
 		// 壁纸遮罩暗度，让横幅文字显示更清晰，0-1之间，值越大越暗
-		dimOpacity: 0.2,
+		dimOpacity: 0.3,
 		// 多视频播放模式："order" 顺序循环，"random" 随机切换（仅当 playerUrl 为数组时生效）
 		playerMode: "random",
 		// 主页横幅文字
@@ -115,11 +115,12 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 					icon: "fa7-solid:envelope",
 					url: "mailto:thorn1433223@gmail.com",
 				},
-				{
-					name: "Sponsor",
-					icon: "material-symbols:favorite",
-					url: "#",
-				},
+				// 打赏页已关闭（pages.sponsor: false），先收起，避免出现无效的 "#" 入口
+				// {
+				// 	name: "Sponsor",
+				// 	icon: "material-symbols:favorite",
+				// 	url: "#",
+				// },
 				// {
 				// 	name: "RSS",
 				// 	icon: "fa7-solid:rss",
@@ -140,9 +141,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		waves: {
 			enable: {
 				// 桌面端是否启用水波纹动画效果
-				desktop: true,
+				desktop: false,
 				// 移动端是否启用水波纹动画效果
-				mobile: true,
+				mobile: false,
 			},
 		},
 		// 渐变过渡效果配置，当水波纹关闭时自动启用，提供壁纸底部到背景色的平滑过渡
@@ -207,9 +208,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		blurRamp: {
 			enable: {
 				// 桌面端是否启用模糊渐变
-				desktop: true,
+				desktop: false,
 				// 移动端是否启用模糊渐变
-				mobile: true,
+				mobile: false,
 			},
 		},
 	},
