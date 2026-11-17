@@ -6,6 +6,8 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import type { UserSubjectCollection } from "@/types/bangumi";
 import type { NsfwMode } from "@/types/nsfw";
+import type { BangumiRegion } from "@/utils/bangumi-region";
+import { fetchBangumiRegions } from "@/utils/bangumi-region";
 import { filterNsfw, isBangumiNsfw } from "@/utils/nsfw-utils";
 import BangumiSection from "./BangumiSection.svelte";
 
@@ -15,6 +17,8 @@ interface Props {
 	initialActiveTab?: string;
 	bangumiData?: Record<string, UserSubjectCollection[]>;
 	subjectBaseUrl?: string;
+	// 静态模式：构建时已抓取好的地区分类
+	initialRegions?: Record<number, BangumiRegion>;
 	// 动态模式：传入获取配置
 	fetchConfig?: {
 		username: string;
@@ -32,6 +36,7 @@ const {
 	initialActiveTab,
 	bangumiData: staticData,
 	subjectBaseUrl,
+	initialRegions,
 	fetchConfig,
 	nsfw,
 }: Props = $props();
@@ -65,6 +70,9 @@ let dynamicTabs = $state<Array<{ id: string; name: string; count: number }>>(
 	[],
 );
 let dynamicData = $state<Record<string, UserSubjectCollection[]>>({});
+
+// 条目地区分类（仅动画使用），按条目 ID 映射
+let regionMap = $state<Record<number, BangumiRegion>>(initialRegions ?? {});
 
 // 合并后的数据
 const tabs = $derived(staticTabs || dynamicTabs);
@@ -171,6 +179,21 @@ async function loadDynamicData() {
 	activeTab = newTabs[0].id;
 	fetchLoading = false;
 
+	// 异步补充动画的地区分类，不阻塞主体渲染
+	const animeItems = newData.anime || [];
+	if (animeItems.length > 0) {
+		fetchBangumiRegions(
+			apiUrl,
+			animeItems.map((item) => item.subject_id),
+		)
+			.then((regions) => {
+				regionMap = regions;
+			})
+			.catch((e) => {
+				console.error("[Bangumi] Failed to fetch regions:", e);
+			});
+	}
+
 	const now = new Date();
 	const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 	updateTimestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
@@ -219,6 +242,7 @@ onMount(async () => {
       isActive={tab.id === activeTab}
       itemsPerPage={24}
       {subjectBaseUrl}
+      regionMap={tab.id === "anime" ? regionMap : undefined}
       nsfw={nsfwMode}
     />
   {/each}

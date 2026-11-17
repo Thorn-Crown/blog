@@ -11,6 +11,8 @@ import type {
 	UserSubjectCollection,
 	UserSubjectCollectionResponse,
 } from "@/types/bangumi";
+import type { BangumiRegion } from "@/utils/bangumi-region";
+import { fetchBangumiRegions } from "@/utils/bangumi-region";
 import { formatDateI18n } from "@/utils/date-utils";
 import { filterNsfw, isBangumiNsfw } from "@/utils/nsfw-utils";
 
@@ -142,6 +144,7 @@ async function fetchBangumiData(username: string, subjectType: number) {
 // 获取所有启用分类的数据
 const bangumiData: Record<string, UserSubjectCollection[]> = {};
 const tabs: Array<{ id: string; name: string; count: number }> = [];
+const bangumiRegions: Record<number, BangumiRegion> = {};
 let fetchFailed = false;
 
 // 检查是否已配置 Bangumi 用户ID
@@ -211,6 +214,22 @@ if (!isDynamic) {
 			if (bIndex === -1) return -1;
 			return aIndex - bIndex;
 		});
+	}
+
+	// 构建时抓取动画条目的地区分类（国漫/日漫/美漫）
+	const animeItems = bangumiData.anime || [];
+	if (animeItems.length > 0) {
+		try {
+			Object.assign(
+				bangumiRegions,
+				await fetchBangumiRegions(
+					bangumiConfig.apiUrl,
+					animeItems.map((item) => item.subject_id),
+				),
+			);
+		} catch (error) {
+			console.error("[Bangumi] Failed to fetch regions:", error);
+		}
 	}
 } // end if (!isDynamic)
 
@@ -287,7 +306,7 @@ const activeTab = tabs[0]?.id || "anime";
         </div>
       ) : tabs.length > 0 ? (
         <>
-          <BangumiGrid client:load tabs={tabs} initialActiveTab={activeTab} bangumiData={bangumiData} subjectBaseUrl={bangumiConfig.subjectBaseUrl} nsfw={bangumiConfig.nsfw} />
+          <BangumiGrid client:load tabs={tabs} initialActiveTab={activeTab} bangumiData={bangumiData} subjectBaseUrl={bangumiConfig.subjectBaseUrl} initialRegions={bangumiRegions} nsfw={bangumiConfig.nsfw} />
         </>
       ) : (
         <div class="text-center py-16">

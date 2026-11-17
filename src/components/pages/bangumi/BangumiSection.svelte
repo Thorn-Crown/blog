@@ -5,6 +5,7 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import type { UserSubjectCollection } from "@/types/bangumi";
 import type { NsfwMode } from "@/types/nsfw";
+import type { BangumiRegion } from "@/utils/bangumi-region";
 import { filterNsfw, isBangumiNsfw } from "@/utils/nsfw-utils";
 import Card from "./Card.svelte";
 
@@ -14,6 +15,7 @@ interface Props {
 	isActive: boolean;
 	itemsPerPage?: number;
 	subjectBaseUrl?: string;
+	regionMap?: Record<number, BangumiRegion>; // 条目地区分类（仅动画）
 	nsfw?: NsfwMode; // NSFW 处理："off" | "blur" | "hide"
 }
 
@@ -23,6 +25,7 @@ const {
 	isActive,
 	itemsPerPage = 24,
 	subjectBaseUrl,
+	regionMap,
 	nsfw = "off",
 }: Props = $props();
 
@@ -80,7 +83,17 @@ function getFilterLabel(type: "collect" | "doing" | "wish"): string {
 }
 
 // NSFW 拦截：mode === "hide" 时过滤掉命中条目
-const safeItems = $derived(filterNsfw(items, nsfw, isBangumiNsfw));
+// 按条目放送/发售日期降序排列（最新在前），未定档的排在最后
+const safeItems = $derived(
+	[...filterNsfw(items, nsfw, isBangumiNsfw)].sort((a, b) => {
+		const dateA = a.subject?.date ?? "";
+		const dateB = b.subject?.date ?? "";
+		if (!dateA && !dateB) return 0;
+		if (!dateA) return 1;
+		if (!dateB) return -1;
+		return dateB.localeCompare(dateA);
+	}),
+);
 
 const statusCounts = $derived(() => {
 	const counts: Record<string, number> = {};
@@ -127,7 +140,53 @@ const filters = $derived(() => {
 let activeFilter = $state("all");
 let currentPage = $state(1);
 
-const filteredItems = $derived(
+// 地区筛选：仅动画分类、且地区数据已就绪时显示
+const hasRegionFilter = $derived(
+	sectionId === "anime" && !!regionMap && Object.keys(regionMap).length > 0,
+);
+
+function regionOf(item: UserSubjectCollection): BangumiRegion {
+	return regionMap?.[item.subject_id] ?? "other";
+}
+
+const regionFilters = $derived(() => {
+	if (!hasRegionFilter) return [];
+	const counts: Record<BangumiRegion, number> = {
+		cn: 0,
+		jp: 0,
+		us: 0,
+		other: 0,
+	};
+	for (const item of safeItems) {
+		counts[regionOf(item)] += 1;
+	}
+	return [
+		{
+			value: "all",
+			label: i18n(I18nKey.bangumiRegionAll),
+			count: safeItems.length,
+		},
+		{
+			value: "jp",
+			label: i18n(I18nKey.bangumiRegionJp),
+			count: counts.jp,
+		},
+		{
+			value: "cn",
+			label: i18n(I18nKey.bangumiRegionCn),
+			count: counts.cn,
+		},
+		{
+			value: "us",
+			label: i18n(I18nKey.bangumiRegionUs),
+			count: counts.us,
+		},
+	].filter((f) => f.value === "all" || f.count > 0);
+});
+
+let activeRegion = $state("all");
+
+const statusFilteredItems = $derived(
 	activeFilter === "all"
 		? safeItems
 		: safeItems.filter(
@@ -135,6 +194,12 @@ const filteredItems = $derived(
 					(STATUS_MAP[item.type as keyof typeof STATUS_MAP] || "unknown") ===
 					activeFilter,
 			),
+);
+
+const filteredItems = $derived(
+	activeRegion === "all"
+		? statusFilteredItems
+		: statusFilteredItems.filter((item) => regionOf(item) === activeRegion),
 );
 
 const totalPages = $derived(
@@ -153,6 +218,11 @@ function handleFilterChange(filter: string) {
 	currentPage = 1;
 }
 
+function handleRegionChange(region: string) {
+	activeRegion = region;
+	currentPage = 1;
+}
+
 function goToPage(page: number) {
 	if (page >= 1 && page <= totalPages) {
 		currentPage = page;
@@ -162,6 +232,14 @@ function goToPage(page: number) {
 
 <div class="media-section" class:hidden={!isActive} data-section={sectionId}>
   {#if safeItems.length > 0}
+    {#if hasRegionFilter}
+      <FilterControls
+        filters={regionFilters()}
+        activeFilter={activeRegion}
+        onFilterChange={handleRegionChange}
+      />
+    {/if}
+
     <FilterControls
       filters={filters()}
       activeFilter={activeFilter}
