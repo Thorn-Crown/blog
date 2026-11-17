@@ -271,7 +271,7 @@ export const siteConfig: SiteConfig = {
 	// ── 番组计划bangumi配置 ──────────────────────────────────
 	bangumi: {
 		// Bangumi用户ID
-		userId: "1143164",
+		userId: "1301470",
 		// 数据模式：static=构建时获取，dynamic=客户端实时获取
 		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
 		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
@@ -280,8 +280,9 @@ export const siteConfig: SiteConfig = {
 		// 必须使用最终地址：api.bangumi.pro 会 301 跳转到 api.bangumi.lat，
 		// 而跨域重定向的响应不带 CORS 头，浏览器会直接拦截（ERR_FAILED）
 		apiUrl: "https://api.bangumi.lat",
-		// 详情页地址
-		subjectBaseUrl: "https://api.bangumi.lat/subject/",
+		// 详情页地址（点击卡片跳转的网页，不是 API）
+		// bangumi.one 镜像已挂，改用官方主站 bgm.tv
+		subjectBaseUrl: "https://bgm.tv/subject/",
 		// 条目类型排序，数组中的类型将按顺序优先展示
 		// 可选值: "anime" | "book" | "music" | "game" | "real" (暂不支持"real"类型)
 		// 未列出的类型将按默认顺序排在后面
