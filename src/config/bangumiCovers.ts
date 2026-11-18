@@ -4,5 +4,9 @@
 // 图片放置位置：public/images/bangumi/<条目ID>.avif
 export const bangumiCoverOverrides: Record<number, string> = {
 	// 尸兄
-	62115: "/images/bangumi/62115.avif",
+	//62115: "/images/bangumi/62115.avif",
+	// 泡芙小姐 第一季
+	29364: "/images/bangumi/29364.avif",
+	// 斗龙战士
+	23383: "/images/bangumi/23383.avif",
 };
