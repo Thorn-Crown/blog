@@ -132,6 +132,45 @@ export const booknavConfig: BooknavGroup[] = [
 		],
 	},
 	{
+		id: "movie",
+		name: "影视",
+		icon: "material-symbols:live-tv-rounded",
+		desc: "观影与追剧的常用站点",
+		weight: 75,
+		items: [
+			{
+				title: "豆瓣电影 Top250",
+				url: "https://movie.douban.com/top250",
+				desc: "豆瓣评分最高的 250 部电影榜单",
+				weight: 10,
+			},
+			{
+				title: "动漫共和国",
+				url: "https://oneghg.com/",
+				desc: "动漫番剧4k免费观看",
+				weight: 9,
+			},
+			{
+				title: "Bangumi 番组计划",
+				url: "https://bgm.tv/",
+				desc: "动画、书籍与游戏条目数据库",
+				weight: 8,
+			},
+						{
+				title: "Netflix GC",
+				url: "https://netflixgc.me/",
+				desc: "Netflix 影视在线观看",
+				weight: 7,
+			},
+			{
+				title: "电影天堂",
+				url: "https://www.dytt8899.com/",
+				desc: "经典影视资源下载站",
+				weight: 6,
+			},
+		],
+	},
+	{
 		id: "resources",
 		name: "资源",
 		icon: "material-symbols:auto-stories-outline-rounded",
