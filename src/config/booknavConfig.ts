@@ -156,7 +156,7 @@ export const booknavConfig: BooknavGroup[] = [
 				desc: "动画、书籍与游戏条目数据库",
 				weight: 8,
 			},
-						{
+			{
 				title: "Netflix GC",
 				url: "https://netflixgc.me/",
 				desc: "Netflix 影视在线观看",
