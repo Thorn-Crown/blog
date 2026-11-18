@@ -1,10 +1,12 @@
 <script lang="ts">
+import { bangumiCoverOverrides } from "@/config/bangumiCovers";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import type { UserSubjectCollection } from "@/types/bangumi";
 import type { NsfwMode } from "@/types/nsfw";
 import { getFailedCovers, markCoverFailed } from "@/utils/failed-covers";
 import { isBangumiNsfw } from "@/utils/nsfw-utils";
+import { url } from "@/utils/url-utils";
 
 interface Props {
 	item: UserSubjectCollection;
@@ -60,16 +62,23 @@ const tags = $derived(
 		? item.tags
 		: (item.subject?.tags || []).map((t) => t.name).slice(0, 5),
 );
-const visibleTags = $derived(tags.slice(0, 2));
+const visibleTags = $derived(tags.slice(0, 3));
 const hiddenTagCount = $derived(Math.max(tags.length - visibleTags.length, 0));
 
 const FAILED_COVERS_KEY = "bangumi-failed-covers";
 
 const images = $derived(item.subject?.images);
+// 本地封面覆盖优先，缺失时自动回落到 Bangumi 原封面
+const overrideCover = $derived(
+	item.subject?.id ? bangumiCoverOverrides[item.subject.id] : undefined,
+);
 const coverFallbacks = $derived(
-	images
-		? [images.medium, images.common, images.small, images.large].filter(Boolean)
-		: [],
+	[
+		overrideCover ? url(overrideCover) : null,
+		...(images
+			? [images.medium, images.common, images.small, images.large]
+			: []),
+	].filter((src): src is string => Boolean(src)),
 );
 const title = $derived(item.subject?.name_cn || item.subject?.name || "");
 const year = $derived(
