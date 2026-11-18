@@ -180,7 +180,7 @@ export const siteConfig: SiteConfig = {
 		// 底部标签样式，仅在 tagsPosition 为 "bottom" 时生效
 		// "chip"：按钮样式，形状跟随上方的 tagStyle 配置
 		// "text"：无底色，只有文字
-		tagsBottomStyle: "chip",
+		tagsBottomStyle: "text",
 		// PostMeta 元数据显示控制
 		meta: {
 			// 是否显示发布日期

@@ -367,11 +367,9 @@ const seriesData = await getSeriesPosts(entry);
               data-pagefind-body
               data-pagefind-weight="10"
               data-pagefind-meta="title"
-              class="transition w-full block font-bold mb-3
-                        text-3xl md:text-[2.25rem]/[2.75rem]
-                        text-black/90 dark:text-white/90
-                        md:before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
-                        before:absolute before:top-3 before:-left-4.5"
+              class="transition w-full block font-semibold mb-3
+                        text-3xl md:text-[2rem]/[2.6rem]
+                        text-black/90 dark:text-white/90"
             >
               {entry.data.title}
             </div>
@@ -393,7 +391,7 @@ const seriesData = await getSeriesPosts(entry);
             />
             {
               !showPostCover && (
-                <div class="border-(--line-divider) border-dashed border-b mt-3 mb-5" />
+                <div class="border-(--line-divider) border-b mt-3 mb-5" />
               )
             }
           </div>

@@ -1,0 +1,221 @@
+/* ==========================================================================
+   极简留白焕新层
+   统一内容区与侧栏的圆角、描边、间距与信息层级；导航栏与壁纸结构保持不变。
+   本文件在 main.css 中最后引入，未包裹 @layer，因此可稳定覆盖 Tailwind 工具类。
+   ========================================================================== */
+
+/* ---------- 1. 基础节奏与表面 ---------- */
+#content-panel-inner,
+#left-sidebar,
+#right-sidebar {
+	--radius-large: 0.875rem;
+}
+
+#main-grid {
+	row-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+	#main-grid {
+		column-gap: 1.5rem;
+		row-gap: 1.25rem;
+	}
+}
+
+/* 卡片统一为发丝描边，去掉多余的立体感 */
+#content-panel-inner .card-base,
+#left-sidebar .card-base,
+#right-sidebar .card-base,
+#mobile-bottom-sidebar .card-base {
+	border: 1px solid var(--line-divider);
+	box-shadow: none;
+}
+
+/* ---------- 2. 分类导航：轻量胶囊 ---------- */
+#content-panel-inner #category-bar {
+	padding: 0.5rem 0.75rem;
+	margin-bottom: 1.25rem;
+}
+
+#content-panel-inner #category-bar .category-pill {
+	background: transparent;
+	border-color: transparent;
+	color: var(--content-meta);
+	font-weight: 600;
+}
+
+#category-bar .category-pill .pill-count {
+	background: transparent;
+	padding: 0;
+	font-weight: 500;
+	opacity: 0.45;
+}
+
+#category-bar .category-pill:hover {
+	background: color-mix(in srgb, var(--primary) 8%, transparent);
+	border-color: transparent;
+	color: var(--primary);
+}
+
+#category-bar .category-pill[data-active] {
+	background: var(--primary);
+	color: white;
+}
+
+#category-bar .category-pill[data-active]:hover {
+	background: var(--primary);
+	color: white;
+	opacity: 0.92;
+}
+
+#category-bar .category-pill[data-active] .pill-count {
+	background: rgb(255 255 255 / 0.2);
+	padding: 0.05rem 0.35rem;
+	opacity: 0.9;
+}
+
+#category-bar .category-pill[data-soft-active] {
+	background: color-mix(in srgb, var(--primary) 10%, transparent);
+	color: var(--primary);
+}
+
+#category-bar .category-pill[data-soft-active]:hover {
+	background: color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+/* ---------- 3. 文章卡片：克制的标题与更松的正文 ---------- */
+#post-list-container .post-card-wrapper {
+	background: var(--card-bg);
+	border: 1px solid var(--line-divider);
+}
+
+#post-list-container .post-card-wrapper:hover {
+	border-color: color-mix(in srgb, var(--primary) 24%, var(--line-divider));
+}
+
+#post-list-container .post-card-title {
+	font-size: 1.375rem !important;
+	font-weight: 600 !important;
+	line-height: 1.45 !important;
+	letter-spacing: -0.015em;
+	margin-bottom: 0.75rem !important;
+}
+
+/* 去掉标题左侧的装饰竖条，改用纯排版建立层级 */
+#post-list-container .post-card-title::before {
+	display: none !important;
+}
+
+#post-list-container .post-card-wrapper .description {
+	line-height: 1.75;
+}
+
+@media (max-width: 767px) {
+	#post-list-container .post-card-title {
+		font-size: 1.0625rem !important;
+		line-height: 1.5 !important;
+		margin-bottom: 0.375rem !important;
+	}
+}
+
+/* 无封面卡片：把彩色进入按钮收成中性描边 */
+#post-list-container .post-card-enter-btn {
+	background: transparent;
+	border: 1px solid var(--line-divider);
+}
+
+#post-list-container .post-card-enter-btn:hover {
+	background: color-mix(in srgb, var(--primary) 8%, transparent);
+	border-color: color-mix(in srgb, var(--primary) 30%, var(--line-divider));
+}
+
+#post-list-container .post-card-enter-btn svg {
+	color: var(--content-meta);
+}
+
+/* 首页列表分区标题 */
+.home-list-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	padding: 0 0.25rem;
+	margin: 0 0 0.75rem;
+}
+
+.home-list-header .home-list-title {
+	font-size: 0.9375rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--deep-text);
+}
+
+.home-list-header .home-list-count {
+	font-size: 0.8125rem;
+	color: var(--content-meta);
+}
+
+/* ---------- 4. 元信息：去掉图标胶囊，降低视觉噪音 ---------- */
+#post-list-container .post-meta-root.post-meta:not(.post-meta-cover) .meta-icon,
+#post-container .post-meta-root:not(.post-meta-cover) .meta-icon {
+	width: 1.125rem !important;
+	height: 1.125rem !important;
+	margin-right: 0.375rem !important;
+	background: transparent !important;
+	color: var(--content-meta) !important;
+	opacity: 0.7;
+}
+
+#post-list-container .post-meta-root.post-meta:not(.post-meta-cover) .meta-icon svg,
+#post-container .post-meta-root:not(.post-meta-cover) .meta-icon svg {
+	width: 1rem;
+	height: 1rem;
+}
+
+/* ---------- 5. 侧栏组件：小号分区标签 ---------- */
+#left-sidebar .widget-title,
+#right-sidebar .widget-title,
+#mobile-bottom-sidebar .widget-title {
+	margin: 1.25rem 1rem 0.5rem !important;
+	font-size: 0.8125rem !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.08em;
+	color: var(--content-meta) !important;
+}
+
+#left-sidebar .widget-title::before,
+#right-sidebar .widget-title::before,
+#mobile-bottom-sidebar .widget-title::before {
+	display: none !important;
+}
+
+/* ---------- 6. 文章详情：更舒展的正文与分区标题 ---------- */
+#post-container .prose {
+	font-size: 1.0625rem;
+}
+
+#post-container .custom-md p {
+	line-height: 1.85;
+}
+
+#post-container .custom-md h2 {
+	margin-top: 2.5rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--line-divider);
+	letter-spacing: -0.01em;
+}
+
+#post-container .custom-md h3 {
+	margin-top: 2rem;
+	letter-spacing: -0.005em;
+}
+
+#post-container [data-pagefind-weight="10"] {
+	letter-spacing: -0.02em;
+}
+
+/* ---------- 7. 页脚：一条通栏细线 ---------- */
+.site-footer > .border-t {
+	margin-inline: 0 !important;
+	border-style: solid !important;
+	border-color: var(--line-divider) !important;
+}

@@ -28,6 +28,19 @@ const heading =
 ---
 
 <MainGridLayout heading={heading}>
+  {
+    page.currentPage === 1 && (
+      <div
+        class="home-list-header onload-animation"
+        style="animation-delay: var(--content-delay)"
+      >
+        <span class="home-list-title">{i18n(I18nKey.recentPosts)}</span>
+        <span class="home-list-count">
+          {page.total} {i18n(I18nKey.postsCount)}
+        </span>
+      </div>
+    )
+  }
   <PostPage page={page} />
   {
     page.total > page.size && (
