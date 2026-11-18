@@ -1,21 +1,73 @@
 export type BangumiRegion = "cn" | "jp" | "us" | "other";
 
+type BangumiTag = { name?: string; count?: number };
+
 // 用于判断条目的国家/地区，取自 Bangumi 条目详情接口的全站标签
 const REGION_TAGS: Record<Exclude<BangumiRegion, "other">, string[]> = {
-	cn: ["中国", "国产", "国漫", "中国动画"],
+	cn: ["中国", "国产", "国漫", "国创", "中国动画", "国产动画"],
 	jp: ["日本", "日漫"],
 	us: ["美国", "美漫", "欧美"],
 };
 
-export function classifyRegion(tags: string[]): BangumiRegion {
-	const set = new Set(tags);
-	if (REGION_TAGS.cn.some((tag) => set.has(tag))) return "cn";
-	if (REGION_TAGS.us.some((tag) => set.has(tag))) return "us";
-	if (REGION_TAGS.jp.some((tag) => set.has(tag))) return "jp";
-	return "other";
+const REGION_PRIORITY: Exclude<BangumiRegion, "other">[] = ["cn", "us", "jp"];
+
+function toTagName(tag: string | BangumiTag): string | undefined {
+	return typeof tag === "string" ? tag : tag.name;
 }
 
-const CACHE_KEY = "bangumi-region-cache-v1";
+function toTagCount(tag: string | BangumiTag): number {
+	return typeof tag === "string" ? 0 : (tag.count ?? 0);
+}
+
+function pickRegion(names: string[]): BangumiRegion | null {
+	const set = new Set(names);
+	for (const region of REGION_PRIORITY) {
+		if (REGION_TAGS[region].some((tag) => set.has(tag))) return region;
+	}
+	return null;
+}
+
+/**
+ * 判断条目的国家/地区。
+ * 优先使用 Bangumi 维护的 meta_tags（由 wiki 编辑整理，比用户标签可靠），
+ * 缺失时再按全站标签的投票数取最高的地区标签。
+ * 例：「赛博朋克：边缘行者」带有少量「欧美」标签，但 meta_tags 为「日本」，
+ * 且「日本」标签票数远高于「欧美」，因此判定为日漫。
+ */
+export function classifyRegion(
+	tags: Array<string | BangumiTag>,
+	metaTags: string[] = [],
+): BangumiRegion {
+	const metaRegion = pickRegion(metaTags);
+	if (metaRegion) return metaRegion;
+
+	const scores: Record<Exclude<BangumiRegion, "other">, number> = {
+		cn: 0,
+		us: 0,
+		jp: 0,
+	};
+
+	for (const tag of tags) {
+		const name = toTagName(tag);
+		if (!name) continue;
+		const count = toTagCount(tag);
+		for (const region of REGION_PRIORITY) {
+			if (REGION_TAGS[region].includes(name)) {
+				scores[region] = Math.max(scores[region], count);
+			}
+		}
+	}
+
+	let best: Exclude<BangumiRegion, "other"> | null = null;
+	for (const region of REGION_PRIORITY) {
+		if (scores[region] <= 0) continue;
+		if (best === null || scores[region] > scores[best]) best = region;
+	}
+
+	return best ?? "other";
+}
+
+const CACHE_KEY = "bangumi-region-cache-v2";
 const DEFAULT_CONCURRENCY = 6;
 
 type RegionCache = Record<string, BangumiRegion>;
@@ -45,7 +97,7 @@ function writeCache(cache: RegionCache) {
 export async function fetchBangumiRegions(
 	apiUrl: string,
 	ids: number[],
-	concurrency = DEFAULT_CONCURRENCY,
+	concurrency: number = DEFAULT_CONCURRENCY,
 ): Promise<Record<number, BangumiRegion>> {
 	const cache = readCache();
 	const result: Record<number, BangumiRegion> = {};
@@ -75,10 +127,13 @@ export async function fetchBangumiRegions(
 					continue;
 				}
 				const data = await resp.json();
-				const names: string[] = (data.tags || [])
-					.map((tag: { name?: string }) => tag.name)
-					.filter((name: unknown): name is string => typeof name === "string");
-				const region = classifyRegion(names);
+				const tags: BangumiTag[] = Array.isArray(data.tags) ? data.tags : [];
+				const metaTags: string[] = Array.isArray(data.meta_tags)
+					? data.meta_tags.filter(
+							(name: unknown): name is string => typeof name === "string",
+						)
+					: [];
+				const region = classifyRegion(tags, metaTags);
 				result[id] = region;
 				cache[String(id)] = region;
 			} catch {
