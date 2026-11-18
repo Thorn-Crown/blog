@@ -95,11 +95,24 @@ const safeItems = $derived(
 	}),
 );
 
+let activeFilter = $state("all");
+let activeRegion = $state("all");
+
+function statusOf(item: UserSubjectCollection): string {
+	return STATUS_MAP[item.type] ?? "unknown";
+}
+
+// 当前地区筛选下的条目：状态计数只统计这一部分
+const regionScopedItems = $derived(
+	activeRegion === "all"
+		? safeItems
+		: safeItems.filter((item) => regionOf(item) === activeRegion),
+);
+
 const statusCounts = $derived(() => {
 	const counts: Record<string, number> = {};
-	for (const item of safeItems) {
-		const status =
-			STATUS_MAP[item.type as keyof typeof STATUS_MAP] || "unknown";
+	for (const item of regionScopedItems) {
+		const status = statusOf(item);
 		counts[status] = (counts[status] || 0) + 1;
 	}
 	return counts;
@@ -111,7 +124,7 @@ const filters = $derived(() => {
 		{
 			value: "all",
 			label: i18n(I18nKey.bangumiFilterAll),
-			count: safeItems.length,
+			count: regionScopedItems.length,
 		},
 		{
 			value: "collect",
@@ -137,7 +150,6 @@ const filters = $derived(() => {
 	].filter((f) => f.value === "all" || f.count > 0);
 });
 
-let activeFilter = $state("all");
 let currentPage = $state(1);
 
 // 地区筛选：仅动画分类、且地区数据已就绪时显示
@@ -184,23 +196,13 @@ const regionFilters = $derived(() => {
 	].filter((f) => f.value === "all" || f.count > 0);
 });
 
-let activeRegion = $state("all");
-
 const statusFilteredItems = $derived(
 	activeFilter === "all"
-		? safeItems
-		: safeItems.filter(
-				(item) =>
-					(STATUS_MAP[item.type as keyof typeof STATUS_MAP] || "unknown") ===
-					activeFilter,
-			),
+		? regionScopedItems
+		: regionScopedItems.filter((item) => statusOf(item) === activeFilter),
 );
 
-const filteredItems = $derived(
-	activeRegion === "all"
-		? statusFilteredItems
-		: statusFilteredItems.filter((item) => regionOf(item) === activeRegion),
-);
+const filteredItems = $derived(statusFilteredItems);
 
 const totalPages = $derived(
 	Math.max(1, Math.ceil(filteredItems.length / itemsPerPage)),
@@ -220,6 +222,17 @@ function handleFilterChange(filter: string) {
 
 function handleRegionChange(region: string) {
 	activeRegion = region;
+	// 切换地区后，若当前状态在该地区没有条目，就回退到「全部」
+	const scoped =
+		region === "all"
+			? safeItems
+			: safeItems.filter((item) => regionOf(item) === region);
+	if (
+		activeFilter !== "all" &&
+		!scoped.some((item) => statusOf(item) === activeFilter)
+	) {
+		activeFilter = "all";
+	}
 	currentPage = 1;
 }
 
