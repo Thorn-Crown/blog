@@ -6,6 +6,7 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import type { UserSubjectCollection } from "@/types/bangumi";
 import type { NsfwMode } from "@/types/nsfw";
+import { fillMissingBangumiDates } from "@/utils/bangumi-date";
 import type { BangumiRegion } from "@/utils/bangumi-region";
 import { fetchBangumiRegions } from "@/utils/bangumi-region";
 import { filterNsfw, isBangumiNsfw } from "@/utils/nsfw-utils";
@@ -119,6 +120,21 @@ async function fetchCategory(
 	return allItems;
 }
 
+async function enrichMissingDates(
+	data: Record<string, UserSubjectCollection[]>,
+	apiUrl: string,
+) {
+	const entries = await Promise.all(
+		Object.entries(data).map(async ([key, items]) => {
+			const filled = await fillMissingBangumiDates(items, apiUrl);
+			return [key, filled] as const;
+		}),
+	);
+	if (entries.some(([key, items]) => items !== data[key])) {
+		dynamicData = Object.fromEntries(entries);
+	}
+}
+
 async function loadDynamicData() {
 	if (!fetchConfig) return;
 	const { username, apiUrl, categories, categoryOrder, pagination } =
@@ -197,6 +213,9 @@ async function loadDynamicData() {
 	const now = new Date();
 	const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 	updateTimestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+
+	// 部分条目缺少结构化日期，异步从条目详情补年份，不阻塞首屏
+	void enrichMissingDates(newData, apiUrl);
 }
 
 // 从 URL hash 恢复 tab

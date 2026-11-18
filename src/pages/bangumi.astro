@@ -11,6 +11,7 @@ import type {
 	UserSubjectCollection,
 	UserSubjectCollectionResponse,
 } from "@/types/bangumi";
+import { fillMissingBangumiDates } from "@/utils/bangumi-date";
 import type { BangumiRegion } from "@/utils/bangumi-region";
 import { fetchBangumiRegions } from "@/utils/bangumi-region";
 import { formatDateI18n } from "@/utils/date-utils";
@@ -181,7 +182,10 @@ if (!isDynamic) {
 					bangumiConfig.nsfw,
 					isBangumiNsfw,
 				);
-				bangumiData[categoryKey] = filteredData;
+				bangumiData[categoryKey] = await fillMissingBangumiDates(
+					filteredData,
+					bangumiConfig.apiUrl,
+				);
 				tabs.push({
 					id: categoryKey,
 					name: categoryInfo.name,
