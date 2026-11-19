@@ -46,19 +46,56 @@ const nsfwMode = $derived(nsfw ?? fetchConfig?.nsfw ?? "off");
 
 const isDynamic = $derived(!!fetchConfig);
 
+// ── 客户端缓存（SWR）──────────────────────────────────
+// 命中缓存时秒开，后台静默刷新；按 NSFW 模式分桶，TTL 1 小时
+interface BangumiCachePayload {
+	ts: number;
+	tabs: Array<{ id: string; name: string; count: number }>;
+	data: Record<string, UserSubjectCollection[]>;
+	regions: Record<number, BangumiRegion>;
+}
+const CACHE_TTL = 60 * 60 * 1000;
+
+function dataCacheKey(): string {
+	return `bangumi-dynamic-cache-v1:${nsfwMode}`;
+}
+
+function readDataCache(): BangumiCachePayload | null {
+	if (typeof window === "undefined") return null;
+	try {
+		const raw = window.localStorage.getItem(dataCacheKey());
+		if (!raw) return null;
+		const parsed = JSON.parse(raw) as BangumiCachePayload;
+		if (Date.now() - parsed.ts > CACHE_TTL) return null;
+		return parsed;
+	} catch {
+		return null;
+	}
+}
+
+function writeDataCache(payload: BangumiCachePayload) {
+	if (typeof window === "undefined") return;
+	try {
+		window.localStorage.setItem(dataCacheKey(), JSON.stringify(payload));
+	} catch {
+		// 存储不可用或已满时静默忽略
+	}
+}
+
 // 状态
 let activeTab = $state("");
-let fetchLoading = $state(false);
+// 是否显示骨架屏：动态模式默认加载，onMount 命中缓存会立即关闭
+let fetchLoading = $state(!!fetchConfig);
 const loading = $derived(isDynamic && fetchLoading);
 let error = $state(false);
 
-// 初始化 activeTab / 当 fetchConfig 变化时重置状态
+// 初始化 activeTab / 当 fetchConfig 变化时重置错误状态
+// 加载状态由 onMount 根据缓存决定，避免缓存命中时闪一下骨架屏
 $effect(() => {
 	if (initialActiveTab) {
 		activeTab = initialActiveTab;
 	}
 	if (fetchConfig) {
-		fetchLoading = true;
 		error = false;
 	}
 });
@@ -120,22 +157,83 @@ async function fetchCategory(
 	return allItems;
 }
 
-async function enrichMissingDates(
-	data: Record<string, UserSubjectCollection[]>,
-	apiUrl: string,
-) {
-	const entries = await Promise.all(
-		Object.entries(data).map(async ([key, items]) => {
-			const filled = await fillMissingBangumiDates(items, apiUrl);
-			return [key, filled] as const;
-		}),
-	);
-	if (entries.some(([key, items]) => items !== data[key])) {
-		dynamicData = Object.fromEntries(entries);
-	}
+function tabsDiffer(
+	a: Array<{ id: string; count: number }>,
+	b: Array<{ id: string; count: number }>,
+): boolean {
+	if (a.length !== b.length) return true;
+	return a.some((t, i) => t.id !== b[i].id || t.count !== b[i].count);
 }
 
-async function loadDynamicData() {
+function dataDiffer(
+	a: Record<string, UserSubjectCollection[]>,
+	b: Record<string, UserSubjectCollection[]>,
+): boolean {
+	const keys = Object.keys(a);
+	if (keys.length !== Object.keys(b).length) return true;
+	for (const k of keys) {
+		const aList = a[k];
+		const bList = b[k];
+		const la = aList?.length ?? 0;
+		const lb = bList?.length ?? 0;
+		if (la !== lb) return true;
+		if (la > 0 && aList && bList) {
+			if (
+				aList[0].subject_id !== bList[0].subject_id ||
+				aList[la - 1].subject_id !== bList[la - 1].subject_id
+			) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+async function enrichAllDates(
+	data: Record<string, UserSubjectCollection[]>,
+	apiUrl: string,
+): Promise<Record<string, UserSubjectCollection[]>> {
+	const entries = await Promise.all(
+		Object.entries(data).map(async ([key, items]) => {
+			return [key, await fillMissingBangumiDates(items, apiUrl)] as const;
+		}),
+	);
+	return Object.fromEntries(entries) as Record<string, UserSubjectCollection[]>;
+}
+
+// 并行补全地区 + 年份，完成后更新状态并写入缓存（不阻塞首屏）
+async function enrichAndCache(
+	data: Record<string, UserSubjectCollection[]>,
+	tabs: Array<{ id: string; name: string; count: number }>,
+	baseRegions: Record<number, BangumiRegion>,
+	apiUrl: string,
+) {
+	const animeItems = data.anime || [];
+	const regionPromise =
+		animeItems.length > 0
+			? fetchBangumiRegions(
+					apiUrl,
+					animeItems.map((item) => item.subject_id),
+				).catch(() => ({}) as Record<number, BangumiRegion>)
+			: Promise.resolve({} as Record<number, BangumiRegion>);
+
+	const [newRegions, datedData] = await Promise.all([
+		regionPromise,
+		enrichAllDates(data, apiUrl),
+	]);
+
+	const mergedRegions = { ...baseRegions, ...newRegions };
+	dynamicData = datedData;
+	regionMap = mergedRegions;
+	writeDataCache({
+		ts: Date.now(),
+		tabs,
+		data: datedData,
+		regions: mergedRegions,
+	});
+}
+
+async function loadDynamicData(background: boolean) {
 	if (!fetchConfig) return;
 	const { username, apiUrl, categories, categoryOrder, pagination } =
 		fetchConfig;
@@ -155,67 +253,85 @@ async function loadDynamicData() {
 		});
 	}
 
-	const newTabs: Array<{ id: string; name: string; count: number }> = [];
-	const newData: Record<string, UserSubjectCollection[]> = {};
+	type FetchOk = { key: string; name: string; data: UserSubjectCollection[] };
+	type FetchFail = { key: string; error: unknown };
 
-	for (const catKey of enabled) {
-		const info = categoryMap[catKey];
-		if (!info) continue;
-		try {
-			const data = await fetchCategory(
-				apiUrl,
-				username,
-				info.subjectType,
-				pagination,
-			);
-			// NSFW 拦截：hide 模式下过滤掉 NSFW 条目，保持标签页计数一致
-			const filtered = filterNsfw(data, nsfwMode, isBangumiNsfw);
-			newData[catKey] = filtered;
-			newTabs.push({ id: catKey, name: info.name, count: filtered.length });
-		} catch (e) {
-			console.error(`[Bangumi] Failed to fetch ${catKey} data:`, e);
+	// 并行抓取所有分类，避免串行累计延迟
+	const results = await Promise.all(
+		enabled.map(async (catKey): Promise<FetchOk | FetchFail | null> => {
+			const info = categoryMap[catKey];
+			if (!info) return null;
+			try {
+				const data = await fetchCategory(
+					apiUrl,
+					username,
+					info.subjectType,
+					pagination,
+				);
+				// NSFW 拦截：hide 模式下过滤掉 NSFW 条目，保持标签页计数一致
+				const filtered = filterNsfw(data, nsfwMode, isBangumiNsfw);
+				return { key: catKey, name: info.name, data: filtered };
+			} catch (error) {
+				return { key: catKey, error };
+			}
+		}),
+	);
+
+	const failed = results.find((r): r is FetchFail => !!r && "error" in r);
+	if (failed) {
+		console.error(
+			`[Bangumi] Failed to fetch ${failed.key} data:`,
+			failed.error,
+		);
+		if (!background) {
 			fetchLoading = false;
 			error = true;
 			errorTitle = i18n(I18nKey.bangumiFetchError);
 			errorDesc = i18n(I18nKey.bangumiFetchErrorDesc);
-			return;
 		}
-	}
-
-	if (newTabs.length === 0 || newTabs.every((t) => t.count === 0)) {
-		fetchLoading = false;
-		error = true;
-		errorTitle = i18n(I18nKey.bangumiNoData);
-		errorDesc = i18n(I18nKey.bangumiNoDataDescription);
 		return;
 	}
 
-	dynamicTabs = newTabs;
-	dynamicData = newData;
-	activeTab = newTabs[0].id;
-	fetchLoading = false;
+	const ok = results.filter((r): r is FetchOk => !!r && !("error" in r));
 
-	// 异步补充动画的地区分类，不阻塞主体渲染
-	const animeItems = newData.anime || [];
-	if (animeItems.length > 0) {
-		fetchBangumiRegions(
-			apiUrl,
-			animeItems.map((item) => item.subject_id),
-		)
-			.then((regions) => {
-				regionMap = regions;
-			})
-			.catch((e) => {
-				console.error("[Bangumi] Failed to fetch regions:", e);
-			});
+	if (ok.length === 0 || ok.every((r) => r.data.length === 0)) {
+		if (!background) {
+			fetchLoading = false;
+			error = true;
+			errorTitle = i18n(I18nKey.bangumiNoData);
+			errorDesc = i18n(I18nKey.bangumiNoDataDescription);
+		}
+		return;
+	}
+
+	const newTabs = ok.map((r) => ({
+		id: r.key,
+		name: r.name,
+		count: r.data.length,
+	}));
+	const newData: Record<string, UserSubjectCollection[]> = {};
+	for (const r of ok) newData[r.key] = r.data;
+
+	if (!background) {
+		dynamicTabs = newTabs;
+		dynamicData = newData;
+		activeTab = newTabs[0].id;
+		fetchLoading = false;
+	} else if (
+		tabsDiffer(dynamicTabs, newTabs) ||
+		dataDiffer(dynamicData, newData)
+	) {
+		// 后台刷新：数据有变化才更新，避免无谓重渲染
+		dynamicTabs = newTabs;
+		dynamicData = newData;
 	}
 
 	const now = new Date();
 	const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 	updateTimestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
 
-	// 部分条目缺少结构化日期，异步从条目详情补年份，不阻塞首屏
-	void enrichMissingDates(newData, apiUrl);
+	// 异步补全地区 + 年份，完成后写缓存（不阻塞首屏）
+	void enrichAndCache(newData, newTabs, regionMap, apiUrl);
 }
 
 // 从 URL hash 恢复 tab
@@ -235,9 +351,22 @@ function restoreTabFromHash() {
 
 onMount(async () => {
 	restoreTabFromHash();
-	if (isDynamic) {
-		await loadDynamicData();
+	if (!isDynamic) return;
+
+	// 命中缓存：立即渲染旧数据，后台静默刷新（SWR），实现秒开
+	const cached = readDataCache();
+	if (cached && cached.tabs.length > 0) {
+		dynamicTabs = cached.tabs;
+		dynamicData = cached.data;
+		regionMap = cached.regions;
+		activeTab = cached.tabs[0]?.id || "";
+		fetchLoading = false;
+		void loadDynamicData(true);
+		return;
 	}
+
+	fetchLoading = true;
+	await loadDynamicData(false);
 });
 </script>
 
