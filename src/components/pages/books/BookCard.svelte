@@ -24,27 +24,27 @@ const STATUS_KEYS: Record<BookStatus, I18nKey> = {
 	dropped: I18nKey.booksFilterDropped,
 };
 
+// 豆瓣 CDN 会间歇性限流（418/403），失败时加参数破缓存并延迟重试，避免封面偶发变空。
+const MAX_RETRY = 3;
+const RETRY_DELAY_MS = 1000;
+
 let coverFailed = $state(false);
-let coverLoaded = $state(false);
-let imgEl = $state<HTMLImageElement | undefined>(undefined);
+let attempt = $state(0);
 
-// 兜底：若图片在 Svelte 水合前就已完成加载，onload 不会再触发，
-// 需主动读取 complete 状态，否则封面会一直停留在透明态（看起来是空白）。
-$effect(() => {
-	if (!imgEl?.complete) return;
-	if (imgEl.naturalWidth > 0) {
-		coverLoaded = true;
-	} else {
-		coverFailed = true;
-	}
-});
-
-function handleLoad() {
-	coverLoaded = true;
-}
+const coverSrc = $derived(
+	attempt === 0
+		? book.cover
+		: `${book.cover}${book.cover.includes("?") ? "&" : "?"}retry=${attempt}`,
+);
 
 function handleError() {
-	coverFailed = true;
+	if (attempt >= MAX_RETRY) {
+		coverFailed = true;
+		return;
+	}
+	setTimeout(() => {
+		attempt += 1;
+	}, RETRY_DELAY_MS);
 }
 
 const statusText = $derived(i18n(STATUS_KEYS[book.status as BookStatus]));
@@ -66,23 +66,14 @@ const tag = $derived(book.link ? "a" : "article");
 		: {})}
 	class="group relative overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02] block"
 >
-	<div class="aspect-2/3 relative overflow-hidden">
+	<div class="aspect-2/3 relative overflow-hidden bg-(--muted)">
 		{#if !coverFailed}
-			<div
-				class="lqip-placeholder absolute inset-0 pointer-events-none"
-				style="background: var(--muted)"
-				aria-hidden="true"
-			></div>
 			<img
-				bind:this={imgEl}
-				src={book.cover}
+				src={coverSrc}
 				alt={book.title}
-				class="w-full h-full object-cover pointer-events-none transition-all duration-500 ease-out group-hover:scale-105 {coverLoaded
-					? 'opacity-100'
-					: 'opacity-0'}"
+				class="w-full h-full object-cover pointer-events-none transition-transform duration-500 ease-out group-hover:scale-105"
 				loading="lazy"
 				decoding="async"
-				onload={handleLoad}
 				onerror={handleError}
 			/>
 		{:else}
