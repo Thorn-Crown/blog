@@ -526,6 +526,19 @@ enum I18nKey {
 	exitImmersiveReading = "exitImmersiveReading",
 	tocExpand = "tocExpand",
 	tocCollapse = "tocCollapse",
+
+	// 书房
+	booksTitle = "booksTitle",
+	booksSubtitle = "booksSubtitle",
+	booksFilterAll = "booksFilterAll",
+	booksFilterWish = "booksFilterWish",
+	booksFilterReading = "booksFilterReading",
+	booksFilterRead = "booksFilterRead",
+	booksFilterOnHold = "booksFilterOnHold",
+	booksFilterDropped = "booksFilterDropped",
+	booksTagsLabel = "booksTagsLabel",
+	booksEmpty = "booksEmpty",
+	booksEmptyHint = "booksEmptyHint",
 }
 
 export default I18nKey;

@@ -542,4 +542,18 @@ export const ko: Translation = {
 	[Key.exitImmersiveReading]: "몰입형 읽기 종료",
 	[Key.tocExpand]: "목차 펼치기",
 	[Key.tocCollapse]: "목차 접기",
+
+	// 서재
+	[Key.booksTitle]: "내 서재",
+	[Key.booksSubtitle]: "읽은 책 기록",
+	[Key.booksFilterAll]: "전체",
+	[Key.booksFilterWish]: "읽고 싶은",
+	[Key.booksFilterReading]: "읽는 중",
+	[Key.booksFilterRead]: "읽음",
+	[Key.booksFilterOnHold]: "보류",
+	[Key.booksFilterDropped]: "중단",
+	[Key.booksTagsLabel]: "태그",
+	[Key.booksEmpty]: "책이 없습니다",
+	[Key.booksEmptyHint]:
+		"아직 추가된 책이 없습니다. src/config/booksConfig.ts에 추가해 보세요.",
 };

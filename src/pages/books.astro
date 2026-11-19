@@ -1,0 +1,44 @@
+---
+import { Icon } from "astro-icon/components";
+import BookShelf from "@/components/pages/books/BookShelf.svelte";
+import { booksConfig, siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import "@/styles/pages/common.css";
+import "@/styles/pages/media-grid.css";
+
+// 检查页面是否启用
+if (!siteConfig.pages.books) {
+	return Astro.redirect("/404/");
+}
+
+const books = booksConfig.books;
+---
+
+<MainGridLayout
+	title={i18n(I18nKey.booksTitle)}
+	description={i18n(I18nKey.booksSubtitle)}
+>
+	<div
+		class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32"
+	>
+		<div class="card-base z-10 px-9 py-6 relative w-full">
+			<div class="relative w-full mb-8">
+				<div class="mb-6">
+					<div class="page-heading">
+						<div class="page-icon" aria-hidden="true">
+							<Icon name="material-symbols:menu-book" />
+						</div>
+						<div>
+							<h2>{i18n(I18nKey.booksTitle)}</h2>
+							<p>{i18n(I18nKey.booksSubtitle)}</p>
+						</div>
+					</div>
+				</div>
+
+				<BookShelf client:load books={books} />
+			</div>
+		</div>
+	</div>
+</MainGridLayout>

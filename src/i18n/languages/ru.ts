@@ -546,4 +546,18 @@ export const ru: Translation = {
 	[Key.exitImmersiveReading]: "Выйти из режима чтения",
 	[Key.tocExpand]: "Развернуть оглавление",
 	[Key.tocCollapse]: "Свернуть оглавление",
+
+	// Книжная полка
+	[Key.booksTitle]: "Моя библиотека",
+	[Key.booksSubtitle]: "Записи о прочитанных книгах",
+	[Key.booksFilterAll]: "Все",
+	[Key.booksFilterWish]: "Хочу прочитать",
+	[Key.booksFilterReading]: "Читаю",
+	[Key.booksFilterRead]: "Прочитано",
+	[Key.booksFilterOnHold]: "Отложено",
+	[Key.booksFilterDropped]: "Брошено",
+	[Key.booksTagsLabel]: "Теги",
+	[Key.booksEmpty]: "Книг пока нет",
+	[Key.booksEmptyHint]:
+		"Книги ещё не добавлены. Добавьте их в src/config/booksConfig.ts.",
 };

@@ -545,4 +545,18 @@ export const en: Translation = {
 	[Key.exitImmersiveReading]: "Exit Immersive Reading",
 	[Key.tocExpand]: "Expand directory",
 	[Key.tocCollapse]: "Collapse directory",
+
+	// Bookshelf
+	[Key.booksTitle]: "My Bookshelf",
+	[Key.booksSubtitle]: "Books I've read",
+	[Key.booksFilterAll]: "All",
+	[Key.booksFilterWish]: "Wishlist",
+	[Key.booksFilterReading]: "Reading",
+	[Key.booksFilterRead]: "Read",
+	[Key.booksFilterOnHold]: "On Hold",
+	[Key.booksFilterDropped]: "Dropped",
+	[Key.booksTagsLabel]: "Tags",
+	[Key.booksEmpty]: "No books yet",
+	[Key.booksEmptyHint]:
+		"No books added yet. Add some in src/config/booksConfig.ts.",
 };

@@ -542,4 +542,18 @@ export const ja: Translation = {
 	[Key.exitImmersiveReading]: "没入型リーディングを終了する",
 	[Key.tocExpand]: "目錄を開く",
 	[Key.tocCollapse]: "目錄をたたむ",
+
+	// 本棚
+	[Key.booksTitle]: "私の本棚",
+	[Key.booksSubtitle]: "読んだ本の記録",
+	[Key.booksFilterAll]: "すべて",
+	[Key.booksFilterWish]: "読みたい",
+	[Key.booksFilterReading]: "読んでいる",
+	[Key.booksFilterRead]: "読んだ",
+	[Key.booksFilterOnHold]: "中断",
+	[Key.booksFilterDropped]: "やめた",
+	[Key.booksTagsLabel]: "タグ",
+	[Key.booksEmpty]: "本がありません",
+	[Key.booksEmptyHint]:
+		"まだ本が追加されていません。src/config/booksConfig.ts に追加してください。",
 };

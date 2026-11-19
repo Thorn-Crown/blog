@@ -92,6 +92,9 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			// 番组计划
 			LinkPresets.Bangumi,
 
+			// 书房
+			LinkPresets.Books,
+
 			// VNDB
 			LinkPresets.VNDB,
 
@@ -245,6 +248,12 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		url: "/myanimelist/",
 		icon: "material-symbols:menu-book",
 		pageKey: "mal",
+	},
+	Books: {
+		name: "书房",
+		url: "/books/",
+		icon: "material-symbols:library-books-rounded",
+		pageKey: "books",
 	},
 	Sponsor: {
 		name: "打赏",

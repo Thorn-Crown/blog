@@ -534,4 +534,17 @@ export const zh_TW: Translation = {
 	[Key.exitImmersiveReading]: "退出沉浸閱讀",
 	[Key.tocExpand]: "展開目錄",
 	[Key.tocCollapse]: "摺疊目錄",
+
+	// 書房
+	[Key.booksTitle]: "我的書房",
+	[Key.booksSubtitle]: "記錄讀過的書",
+	[Key.booksFilterAll]: "全部",
+	[Key.booksFilterWish]: "想讀",
+	[Key.booksFilterReading]: "在讀",
+	[Key.booksFilterRead]: "讀過",
+	[Key.booksFilterOnHold]: "擱置",
+	[Key.booksFilterDropped]: "放棄",
+	[Key.booksTagsLabel]: "標籤",
+	[Key.booksEmpty]: "暫無書籍",
+	[Key.booksEmptyHint]: "還沒有添加書籍，去 src/config/booksConfig.ts 裡添加吧",
 };
