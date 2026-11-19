@@ -47,3 +47,7 @@ package/
 .codex*
 .claude
 .mimocode
+.trae/
+
+# browser verification screenshots
+.screenshots/
