@@ -279,9 +279,10 @@ export const siteConfig: SiteConfig = {
 		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
 		mode: "dynamic",
 		// Bangumi API 地址
-		// 必须使用最终地址：api.bangumi.pro 会 301 跳转到 api.bangumi.lat，
-		// 而跨域重定向的响应不带 CORS 头，浏览器会直接拦截（ERR_FAILED）
-		apiUrl: "https://api.bangumi.lat",
+		// 必须使用最终地址：跨域重定向（301）的响应不带 CORS 头，浏览器会直接拦截（ERR_FAILED）。
+		// api.bangumi.pro、api.bangumi.lat 均已失效或跳转到其他域名，不要再用。
+		// bgmapi.anibt.net 可直连（无需代理），且封面会替换为同样可直连的 bgmimg.anibt.net
+		apiUrl: "https://bgmapi.anibt.net",
 		// 详情页地址（点击卡片跳转的网页，不是 API）
 		// bangumi.one 镜像已挂，改用官方主站 bgm.tv
 		subjectBaseUrl: "https://bgm.tv/subject/",
