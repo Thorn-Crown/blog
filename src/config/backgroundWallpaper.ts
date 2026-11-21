@@ -13,50 +13,37 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	 * 3. 远程 URL："https://example.com/banner.jpg"
 	 * 注意：远程URL和public目录的图片不会被优化，请确保图片体积足够小以免影响加载速度
 	 *
-	 * 建议不要替换d1-d6，m1-m6这些默认示例图片，但你可以删除掉节省空间
-	 * 因为以后可能会更换示例图片，导致你自定义的图片被覆盖
-	 * 所以建议使用自己的图片的时候命名为其他名称，不要使用d1-d6，m1-m6这些名称
+	 * 示例壁纸为 三角青輝.avif / 三角青輝2.avif，桌面端与移动端共用
+	 * 建议使用自己的图片时命名为其他名称，避免以后更新示例图时被覆盖
 	 *
 	 * 如果只使用一张图片或者使用随机图API，推荐直接使用字符串格式：
 	 * desktop: "https://t.alcy.cc/pc",   // 随机图API
-	 * desktop: "assets/images/DesktopWallpaper/d1.avif", // 单张图片
+	 * desktop: "assets/images/DesktopWallpaper/三角青輝.avif", // 单张图片
 	 *
 	 * mobile: "https://t.alcy.cc/mp", // 随机图API
-	 * mobile: "assets/images/MobileWallpaper/m1.avif", // 单张图片
+	 * mobile: "assets/images/DesktopWallpaper/三角青輝.avif", // 单张图片（桌面端与移动端共用）
 	 *
 	 * 支持配置多张图片（数组），每次刷新页面随机显示一张：
 	 * desktop: [
-	 * "assets/images/DesktopWallpaper/d1.avif",
-	 * "assets/images/DesktopWallpaper/d2.avif",
+	 * "assets/images/DesktopWallpaper/三角青輝.avif",
+	 * "assets/images/DesktopWallpaper/三角青輝2.avif",
 	 * ],
 	 *
 	 * mobile:[
-	 *   "assets/images/MobileWallpaper/m1.avif",
-	 *   "assets/images/MobileWallpaper/m2.avif",
+	 *   "assets/images/DesktopWallpaper/三角青輝.avif",
+	 *   "assets/images/DesktopWallpaper/三角青輝2.avif",
 	 * ],
 	 */
 	src: {
 		// 桌面背景图片（支持单张或多张随机）
-		// desktop: "assets/images/DesktopWallpaper/d1.avif",
 		desktop: [
-			//"assets/images/DesktopWallpaper/d1.avif",
-			//"assets/images/DesktopWallpaper/d2.avif",
-			//"assets/images/DesktopWallpaper/d3.avif",
-			//"assets/images/DesktopWallpaper/d4.avif",
-			//"assets/images/DesktopWallpaper/d5.avif",
-			//"assets/images/DesktopWallpaper/d6.avif",
 			"assets/images/DesktopWallpaper/三角青輝.avif",
 			"assets/images/DesktopWallpaper/三角青輝2.avif",
 		],
-		// 移动背景图片（支持单张或多张随机）
-		// mobile: "assets/images/MobileWallpaper/m1.avif",
+		// 移动背景图片（支持单张或多张随机，与桌面端共用）
 		mobile: [
-			"assets/images/MobileWallpaper/m1.avif",
-			"assets/images/MobileWallpaper/m2.avif",
-			"assets/images/MobileWallpaper/m3.avif",
-			"assets/images/MobileWallpaper/m4.avif",
-			"assets/images/MobileWallpaper/m5.avif",
-			"assets/images/MobileWallpaper/m6.avif",
+			"assets/images/DesktopWallpaper/三角青輝.avif",
+			"assets/images/DesktopWallpaper/三角青輝2.avif",
 		],
 		// 背景视频播放地址
 		// 支持单个视频路径（字符串）或多个视频循环（数组，参考上面壁纸配置）
