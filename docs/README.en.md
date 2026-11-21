@@ -27,20 +27,6 @@
 
 🔧 Highly Configurable: Most features can be customized through configuration files
 
-<table width="100%" align="center">
-  <tr>
-    <td colspan="3" align="center">
-      <img src="./images/1.webp" >
-      <br>Banner Mode</td>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><img src="./images/3.webp" width="300"><br>Overlay Mode</td>
-    <td align="center"><img src="./images/2.webp" width="300"><br>Fullscreen Wallpaper Mode</td>
-    <td align="center"><img src="./images/4.webp" width="300"><br>Solid Color Mode</td>
-  </tr>
-</table>
-
 <img alt="Lighthouse" src="./images/Lighthouse.png" />
 
 >[!TIP]
