@@ -279,9 +279,6 @@ export default defineConfig({
 				) {
 					return false;
 				}
-				if (pathname === "/sponsor/" && !siteConfig.pages.sponsor) {
-					return false;
-				}
 				return true;
 			},
 		}),

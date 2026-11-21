@@ -14,7 +14,6 @@ export type { CommentConfig } from "./commentConfig";
 export type { CoverImageConfig } from "./coverImageConfig";
 export type { DisplaySettingsConfig } from "./displaySettingsConfig";
 export type { DynamicConfig } from "./dynamicConfig";
-export type { SakuraConfig } from "./effectsConfig";
 
 export type {
 	ExpressiveCodeConfig,
@@ -37,7 +36,6 @@ export type { Live2DWidgetConfig, SpineModelConfig } from "./pioConfig";
 export type { PlantUMLConfig } from "./plantumlConfig";
 export type { ProfileConfig } from "./profileConfig";
 export type {
-	AdConfig,
 	CalendarConfig,
 	MobileBottomComponentConfig,
 	SidebarLayoutConfig,
@@ -52,11 +50,6 @@ export type {
 	SiteConfig,
 	WALLPAPER_MODE,
 } from "./siteConfig";
-export type {
-	SponsorConfig,
-	SponsorItem,
-	SponsorMethod,
-} from "./sponsorConfig";
 
 // 响应式图像布局类型
 export type ResponsiveImageLayout = "constrained" | "full-width" | "none";

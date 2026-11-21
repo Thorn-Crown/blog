@@ -52,9 +52,4 @@ export type DisplaySettingsConfig = {
 	// 全屏透明模式参数调节开关
 	// 设为 false 关闭所有滑块，或用对象形式单独控制每个滑块
 	overlaySwitchable: OverlaySwitchable;
-
-	// ── 特效 (Effects) ────────────────────────────────────
-
-	// 樱花特效开关
-	sakuraSwitchable: boolean;
 };

@@ -12,8 +12,7 @@ const OUTPUT_FILE = "src/constants/lqips.json";
 const IGNORE_DIRS = [
 	"public/favicon/**",
 	"public/pio/**",
-	"public/assets/images/effects/**",
-	"public/assets/music/**",
+	"public/music/**",
 	"public/vndb-covers/**",
 ];
 

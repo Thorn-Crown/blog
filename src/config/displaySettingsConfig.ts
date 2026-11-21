@@ -64,9 +64,4 @@ export const displaySettingsConfig: DisplaySettingsConfig =
 			blur: true,
 			cardOpacity: true,
 		},
-
-		// ── 特效 (Effects) ────────────────────────────────────
-
-		// 樱花特效开关
-		sakuraSwitchable: true,
 	});

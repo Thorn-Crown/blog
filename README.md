@@ -169,7 +169,6 @@ src/
 │   ├── coverImageConfig.ts       # 封面图配置
 │   ├── displaySettingsConfig.ts  # 设置面板配置
 │   ├── dynamicConfig.ts          # 动态页面配置
-│   ├── effectsConfig.ts          # 动画特效配置（樱花等）
 │   ├── expressiveCodeConfig.ts   # 代码高亮配置
 │   ├── fontConfig.ts             # 字体配置
 │   ├── FooterConfig.html           # 页脚配置
@@ -182,8 +181,7 @@ src/
 │   ├── mermaidConfig.ts          # Mermaid 图表配置
 │   ├── plantumlConfig.ts         # PlantUML 图表配置
 │   ├── profileConfig.ts          # 用户资料配置
-│   ├── sidebarConfig.ts          # 侧边栏布局配置
-│   └── sponsorConfig.ts          # 打赏配置
+│   └── sidebarConfig.ts          # 侧边栏布局配置
 ```
 
 ## ⚙️ 文章 Frontmatter

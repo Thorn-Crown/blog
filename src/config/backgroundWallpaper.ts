@@ -117,12 +117,6 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 					icon: "fa7-solid:envelope",
 					url: "mailto:thorn1433223@gmail.com",
 				},
-				// 打赏页已关闭（pages.sponsor: false），先收起，避免出现无效的 "#" 入口
-				// {
-				// 	name: "Sponsor",
-				// 	icon: "material-symbols:favorite",
-				// 	url: "#",
-				// },
 				// {
 				// 	name: "RSS",
 				// 	icon: "fa7-solid:rss",

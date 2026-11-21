@@ -403,8 +403,6 @@ export const ru: Translation = {
 	[Key.wallpaperCarousel]: "Карусель обоев",
 	[Key.wavesAnimation]: "Анимация волн",
 	[Key.gradientTransition]: "Градиентный переход",
-	[Key.sakuraEffect]: "Эффект сакуры",
-	[Key.effectsSettings]: "Настройки эффектов",
 	[Key.overlaySettings]: "Настройки прозрачности",
 	[Key.overlayOpacity]: "Прозрачность обоев",
 	[Key.overlayBlur]: "Размытие фона",
@@ -413,7 +411,6 @@ export const ru: Translation = {
 	// Вкладки панели настроек
 	[Key.settingsTabAppearance]: "Оформление",
 	[Key.settingsTabWallpaper]: "Обои",
-	[Key.settingsTabEffects]: "Эффекты",
 
 	// Стиль карточек
 	[Key.cardSettings]: "Стиль карточек",
@@ -424,24 +421,6 @@ export const ru: Translation = {
 	[Key.postListLayout]: "Макет списка сообщений",
 	[Key.postListLayoutList]: "Список",
 	[Key.postListLayoutGrid]: "Сетка",
-
-	// Страница спонсоров
-	[Key.sponsor]: "Спонсор",
-	[Key.sponsorTitle]: "Поддержать меня",
-	[Key.sponsorDescription]:
-		"Если мой контент был полезен для вас, добро пожаловать поддержать меня следующими способами. Ваша поддержка - это движущая сила моего постоянного творчества!",
-	[Key.sponsorMethods]: "Способы оплаты",
-	[Key.sponsorList]: "Спонсоры",
-	[Key.sponsorEmpty]: "Пока нет спонсоров",
-	[Key.sponsorAmount]: "Сумма",
-	[Key.sponsorDate]: "Дата",
-	[Key.sponsorMessage]: "Сообщение",
-	[Key.sponsorAnonymous]: "Анонимно",
-	[Key.scanToSponsor]: "Сканировать для поддержки",
-	[Key.sponsorGoTo]: "Перейти к спонсору",
-	[Key.sponsorButton]: "Поддержка и Поделиться",
-	[Key.sponsorButtonText]:
-		"Если эта статья помогла вам, пожалуйста, поделитесь или поддержите!",
 
 	[Key.shareOnSocial]: "Поделиться статьей",
 	[Key.shareOnSocialDescription]:
@@ -497,7 +476,6 @@ export const ru: Translation = {
 	[Key.calendarDecember]: "Дек",
 	[Key.calendar]: "Календарь сайта",
 	[Key.calendarHeatmapWeek]: "Неделя {week} {month}, {count} записей",
-	[Key.advertisement]: "Реклама",
 
 	[Key.shareArticle]: "Поделиться",
 	[Key.generatingPoster]: "Создание постера...",

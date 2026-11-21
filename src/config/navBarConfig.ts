@@ -112,15 +112,12 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	});
 
 	// 关于及其子菜单
-	// 做减法：打赏页已关闭（pages.sponsor: false），暂时收起整个入口
+	// 做减法：暂时收起整个入口
 	// links.push({
 	// 	name: "关于",
 	// 	url: "#",
 	// 	icon: "material-symbols:info",
 	// 	children: [
-	// 		// 打赏
-	// 		LinkPresets.Sponsor,
-	//
 	// 		// 关于页面
 	// 		//LinkPresets.About,
 	// 	],
@@ -254,12 +251,6 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		url: "/books/",
 		icon: "material-symbols:library-books-rounded",
 		pageKey: "books",
-	},
-	Sponsor: {
-		name: "打赏",
-		url: "/sponsor/",
-		icon: "material-symbols:favorite",
-		pageKey: "sponsor",
 	},
 	About: {
 		name: "关于我",

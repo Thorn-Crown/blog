@@ -83,7 +83,6 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 
 侧边栏中使用的各种功能小部件。
 
-- `Advertisement.astro` - 广告组件
 - `Announcement.astro` - 公告组件
 - `Calendar.astro` - 日历组件
 - `Categories.astro` - 分类组件
@@ -110,7 +109,6 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `EncryptedPost.astro` - 加密文章组件
 - `Live2DWidget.astro` - Live2D 看板娘组件
 - `MusicPlayer.astro` - 音乐播放器 UI 视图控制器（纯 UI，委托 MusicManager 进行播放控制）
-- `SakuraEffect.astro` - 樱花飘落特效
 - `SpineModel.astro` - Spine 看板娘组件
 - `TypewriterText.astro` - 打字机动画效果
 

@@ -402,8 +402,6 @@ export const en: Translation = {
 	[Key.wallpaperCarousel]: "Wallpaper Carousel",
 	[Key.wavesAnimation]: "Waves Animation",
 	[Key.gradientTransition]: "Gradient Transition",
-	[Key.sakuraEffect]: "Sakura Effect",
-	[Key.effectsSettings]: "Effects Settings",
 	[Key.overlaySettings]: "Transparency Settings",
 	[Key.overlayOpacity]: "Wallpaper Opacity",
 	[Key.overlayBlur]: "Background Blur",
@@ -412,7 +410,6 @@ export const en: Translation = {
 	// Settings Panel Tabs
 	[Key.settingsTabAppearance]: "Appearance",
 	[Key.settingsTabWallpaper]: "Wallpaper",
-	[Key.settingsTabEffects]: "Effects",
 
 	// Card Style
 	[Key.cardSettings]: "Card Style",
@@ -423,24 +420,6 @@ export const en: Translation = {
 	[Key.postListLayout]: "Post List Layout",
 	[Key.postListLayoutList]: "List",
 	[Key.postListLayoutGrid]: "Grid",
-
-	// Sponsor Page
-	[Key.sponsor]: "Sponsor",
-	[Key.sponsorTitle]: "Support Me",
-	[Key.sponsorDescription]:
-		"If my content has been helpful to you, welcome to sponsor me through the following methods. Your support is the driving force for my continued creation!",
-	[Key.sponsorMethods]: "Payment Methods",
-	[Key.sponsorList]: "Sponsors",
-	[Key.sponsorEmpty]: "No sponsors yet",
-	[Key.sponsorAmount]: "Amount",
-	[Key.sponsorDate]: "Date",
-	[Key.sponsorMessage]: "Message",
-	[Key.sponsorAnonymous]: "Anonymous",
-	[Key.scanToSponsor]: "Scan to Sponsor",
-	[Key.sponsorGoTo]: "Go to Sponsor",
-	[Key.sponsorButton]: "Support & Share",
-	[Key.sponsorButtonText]:
-		"If this article helped you, please share or support!",
 
 	[Key.shareOnSocial]: "Share Article",
 	[Key.shareOnSocialDescription]:
@@ -496,7 +475,6 @@ export const en: Translation = {
 	[Key.calendarDecember]: "Dec",
 	[Key.calendar]: "Site Calendar",
 	[Key.calendarHeatmapWeek]: "Week {week} of {month}, {count} posts",
-	[Key.advertisement]: "Advertisement",
 
 	[Key.shareArticle]: "Share",
 	[Key.generatingPoster]: "Generating Poster...",

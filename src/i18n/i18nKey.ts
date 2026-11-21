@@ -388,8 +388,6 @@ enum I18nKey {
 	wallpaperCarousel = "wallpaperCarousel",
 	wavesAnimation = "wavesAnimation",
 	gradientTransition = "gradientTransition",
-	sakuraEffect = "sakuraEffect",
-	effectsSettings = "effectsSettings",
 	overlaySettings = "overlaySettings",
 	overlayOpacity = "overlayOpacity",
 	overlayBlur = "overlayBlur",
@@ -398,7 +396,6 @@ enum I18nKey {
 	// 设置面板标签
 	settingsTabAppearance = "settingsTabAppearance",
 	settingsTabWallpaper = "settingsTabWallpaper",
-	settingsTabEffects = "settingsTabEffects",
 
 	// 卡片样式
 	cardSettings = "cardSettings",
@@ -409,22 +406,6 @@ enum I18nKey {
 	postListLayout = "postListLayout",
 	postListLayoutList = "postListLayoutList",
 	postListLayoutGrid = "postListLayoutGrid",
-
-	// 打赏页面
-	sponsor = "sponsor",
-	sponsorTitle = "sponsorTitle",
-	sponsorDescription = "sponsorDescription",
-	sponsorMethods = "sponsorMethods",
-	sponsorList = "sponsorList",
-	sponsorEmpty = "sponsorEmpty",
-	sponsorAmount = "sponsorAmount",
-	sponsorDate = "sponsorDate",
-	sponsorMessage = "sponsorMessage",
-	sponsorAnonymous = "sponsorAnonymous",
-	scanToSponsor = "scanToSponsor",
-	sponsorGoTo = "sponsorGoTo",
-	sponsorButton = "sponsorButton",
-	sponsorButtonText = "sponsorButtonText",
 
 	shareOnSocial = "shareOnSocial",
 	shareOnSocialDescription = "shareOnSocialDescription",
@@ -479,7 +460,6 @@ enum I18nKey {
 	calendarDecember = "calendarDecember",
 	calendar = "calendar",
 	calendarHeatmapWeek = "calendarHeatmapWeek",
-	advertisement = "advertisement",
 
 	shareArticle = "shareArticle",
 	generatingPoster = "generatingPoster",

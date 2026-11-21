@@ -18,7 +18,6 @@ export const navbarMode: NavbarMode = resolveNavbarMode(siteConfig.navbar);
 
 // 类型导出
 export type {
-	AdConfig,
 	AnalyticsConfig,
 	AnnouncementConfig,
 	BackgroundWallpaperConfig,
@@ -39,12 +38,8 @@ export type {
 	NavBarConfig,
 	PlantUMLConfig,
 	ProfileConfig,
-	SakuraConfig,
 	SidebarLayoutConfig,
 	SiteConfig,
-	SponsorConfig,
-	SponsorItem,
-	SponsorMethod,
 	WidgetComponentConfig,
 	WidgetComponentType,
 	WidgetSpecificConfig,
@@ -66,7 +61,6 @@ export { commentConfig } from "./commentConfig"; // 评论系统配置
 export { coverImageConfig } from "./coverImageConfig"; // 封面图配置
 export { displaySettingsConfig } from "./displaySettingsConfig"; // 显示设置面板开关配置
 export { dynamicConfig } from "./dynamicConfig"; // 动态页面配置
-export { sakuraConfig } from "./effectsConfig"; // 动画特效配置（樱花等）
 export { expressiveCodeConfig } from "./expressiveCodeConfig"; // 代码高亮配置
 export { fontConfig, fontsList } from "./fontConfig"; // 字体配置
 export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友链配置
@@ -83,4 +77,3 @@ export { profileConfig } from "./profileConfig"; // 用户资料配置
 export { sidebarLayoutConfig } from "./sidebarConfig"; // 侧边栏布局配置
 // 核心配置
 export { siteConfig } from "./siteConfig"; // 站点基础配置
-export { sponsorConfig } from "./sponsorConfig"; // 打赏配置

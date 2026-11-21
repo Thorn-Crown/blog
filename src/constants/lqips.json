@@ -2,11 +2,8 @@
   "public:images/bangumi/62115.avif": "958b708d846e494132",
   "public:gallery/firefly-2026/cover.avif": "7588a28a8f989e8d88",
   "public:gallery/firefly-2026/1.avif": "c8bca9dde6d2babfb5",
-  "public:assets/images/ad/ad1.webp": "a1b8b68a8e918c8f93",
   "src:assets/images/my_avatar.avif": "7c7b7983817fb4aeaa",
   "src:assets/images/avatar.avif": "dcd8d5d1cecabea9a9",
-  "public:assets/images/sponsor/wechat.png": "d5d5d5dad9d7dbd8cf",
-  "public:assets/images/sponsor/alipay.png": "8ebbde91bedf93c0e0",
   "src:content/projects/images/firefly.avif": "b5b0b3bcb6bbe0e0df",
   "src:content/posts/images/vitepress.avif": "3d3d43e1e1e7ebe0da",
   "src:content/posts/images/right-grid2.avif": "cbcdcddddcd9d8d7db",
@@ -40,5 +37,7 @@
   "src:assets/images/DesktopWallpaper/d4.avif": "727991b7a7bbe2b8c2",
   "src:assets/images/DesktopWallpaper/d3.avif": "4268936f829e99adc7",
   "src:assets/images/DesktopWallpaper/d2.avif": "e8f3e6b0bdb4f5e6de",
-  "src:assets/images/DesktopWallpaper/d1.avif": "8b9bb59ba6bae7d7dd"
+  "src:assets/images/DesktopWallpaper/d1.avif": "8b9bb59ba6bae7d7dd",
+  "public:images/bangumi/29364.avif": "3f3e4d3831394d434b",
+  "public:images/bangumi/23383.avif": "ae8051be963dd38d5a"
 }

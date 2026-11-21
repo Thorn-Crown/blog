@@ -169,7 +169,6 @@ src/
 │   ├── coverImageConfig.ts       # Cover image configuration
 │   ├── displaySettingsConfig.ts  # Settings panel configuration
 │   ├── dynamicConfig.ts          # Moments page configuration
-│   ├── effectsConfig.ts          # Animation effects config (sakura, etc.)
 │   ├── expressiveCodeConfig.ts   # Code highlighting configuration
 │   ├── fontConfig.ts             # Font configuration
 │   ├── FooterConfig.html           # Footer configuration
@@ -182,8 +181,7 @@ src/
 │   ├── mermaidConfig.ts          # Mermaid diagram configuration
 │   ├── plantumlConfig.ts         # PlantUML diagram configuration
 │   ├── profileConfig.ts          # User profile configuration
-│   ├── sidebarConfig.ts          # Sidebar layout configuration
-│   └── sponsorConfig.ts          # Sponsor configuration
+│   └── sidebarConfig.ts          # Sidebar layout configuration
 ```
 
 

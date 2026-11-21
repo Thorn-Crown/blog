@@ -400,8 +400,6 @@ export const ko: Translation = {
 	[Key.wallpaperCarousel]: "배경화면 캐러셀",
 	[Key.wavesAnimation]: "파도 애니메이션",
 	[Key.gradientTransition]: "그라디언트 전환",
-	[Key.sakuraEffect]: "벚꽃 효과",
-	[Key.effectsSettings]: "효과 설정",
 	[Key.overlaySettings]: "투명도 설정",
 	[Key.overlayOpacity]: "배경화면 불투명도",
 	[Key.overlayBlur]: "배경 흐림",
@@ -410,7 +408,6 @@ export const ko: Translation = {
 	// Settings Panel Tabs
 	[Key.settingsTabAppearance]: "외형",
 	[Key.settingsTabWallpaper]: "배경화면",
-	[Key.settingsTabEffects]: "효과",
 
 	// 카드 스타일
 	[Key.cardSettings]: "카드 스타일",
@@ -421,23 +418,6 @@ export const ko: Translation = {
 	[Key.postListLayout]: "게시글 목록 레이아웃",
 	[Key.postListLayoutList]: "목록형",
 	[Key.postListLayoutGrid]: "격자형",
-
-	// Sponsor Page
-	[Key.sponsor]: "후원",
-	[Key.sponsorTitle]: "저를 후원해 주세요",
-	[Key.sponsorDescription]:
-		"제 콘텐츠가 도움이 되셨다면 아래 방법으로 후원해 주세요. 여러분의 후원은 계속 창작할 수 있는 원동력이 됩니다!",
-	[Key.sponsorMethods]: "결제 방법",
-	[Key.sponsorList]: "후원자",
-	[Key.sponsorEmpty]: "아직 후원자가 없습니다",
-	[Key.sponsorAmount]: "금액",
-	[Key.sponsorDate]: "날짜",
-	[Key.sponsorMessage]: "메시지",
-	[Key.sponsorAnonymous]: "익명",
-	[Key.scanToSponsor]: "스캔하여 후원하기",
-	[Key.sponsorGoTo]: "후원하러 가기",
-	[Key.sponsorButton]: "응원 & 공유",
-	[Key.sponsorButtonText]: "이 글이 도움이 되셨다면 공유하거나 후원해 주세요!",
 
 	[Key.shareOnSocial]: "글 공유하기",
 	[Key.shareOnSocialDescription]:
@@ -493,7 +473,6 @@ export const ko: Translation = {
 	[Key.calendarDecember]: "12월",
 	[Key.calendar]: "사이트 캘린더",
 	[Key.calendarHeatmapWeek]: "{month}의 {week}주차, 게시글 {count}개",
-	[Key.advertisement]: "광고",
 
 	[Key.shareArticle]: "공유",
 	[Key.generatingPoster]: "포스터 생성 중...",
