@@ -37,7 +37,6 @@ const pages = resolvePageToggles({
 	mal: false,
 
 	// ── 关于 (About) ──────────────────────────────────
-
 });
 
 export const siteConfig: SiteConfig = {
